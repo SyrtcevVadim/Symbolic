@@ -1,0 +1,2 @@
+C:\Projects\SymCalc\Debug\SymCalc.exe
+C:\Projects\SymCalc\Debug\SymCalc.pdb
