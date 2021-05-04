@@ -33,10 +33,16 @@
     <ClCompile Include="SymParser.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="symUtilities.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\main.cpp">
       <Filter>Файлы заголовков\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="SymParserTest.cpp">
+    <ClCompile Include="Tests\SymFormConverterTest.cpp">
+      <Filter>Файлы заголовков\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymParserTest.cpp">
       <Filter>Файлы заголовков\Tests</Filter>
     </ClCompile>
   </ItemGroup>
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="SymParser.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="symUtilities.h">
+      <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

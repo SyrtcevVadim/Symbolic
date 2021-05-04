@@ -1,6 +1,3 @@
-#Don't include files with tests
-[Tt]ests
-
 # Prerequisites
 *.d
 

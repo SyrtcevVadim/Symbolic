@@ -3,10 +3,12 @@
 #include<list>
 #include<algorithm>
 #include<string>
+#include<iostream>
 
 using std::string;
 using std::list;
 using std::map;
+using std::cout;
 using std::find;
 
 list<string> SymHelper::tokens{"(",")","[","]","{","}",
@@ -66,11 +68,16 @@ bool SymHelper::IsNumber(const string &str)
     {
         for (char symbol : str)
         {
-            if (symbol != '-' && symbol != '+' && (symbol < '0' || symbol > '9'))
+            if ((symbol == '-' || symbol == '+') && str.size() == 1)
+            {
+                return false;
+            }
+            if (symbol < '0' || symbol > '9')
             {
                 return false;
             }
         }
+        cout << str << " is a number!\n";
         return true;
     }
     return false;

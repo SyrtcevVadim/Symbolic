@@ -139,13 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="SymConstantManager.cpp" />
     <ClCompile Include="SymExpression.cpp" />
     <ClCompile Include="SymFormConverter.cpp" />
     <ClCompile Include="SymHelper.cpp" />
     <ClCompile Include="SymParser.cpp" />
-    <ClCompile Include="SymParserTest.cpp" />
+    <ClCompile Include="symUtilities.cpp" />
+    <ClCompile Include="Tests\main.cpp" />
+    <ClCompile Include="Tests\SymFormConverterTest.cpp" />
+    <ClCompile Include="Tests\SymParserTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SymConstantManager.h" />
@@ -153,6 +155,7 @@
     <ClInclude Include="SymFormConverter.h" />
     <ClInclude Include="SymHelper.h" />
     <ClInclude Include="SymParser.h" />
+    <ClInclude Include="symUtilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

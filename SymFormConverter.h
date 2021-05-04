@@ -1,24 +1,28 @@
 #pragma once
 #include<string>
+#include<list>
 #include<map>
 
 using std::string;
+using std::list;
 using std::map;
 
 class SymFormConverter
 {
 private:
+
 	/// <summary>
 	/// Stores the precedence for every supported operation and function
 	/// </summary>
 	static map<string, int> precedence;
 
 public: 
+
 	/// <summary>
-	/// Converts mathematical expression from infix form to postfix one
+	/// Makes mathematical expression in postfix form from the list of tokens of mathematical expression in infix form
 	/// </summary>
-	/// <param name="infixExpression">Mathematical expression in infix form</param>
+	/// <param name="tokens">List of tokens of mathematical expression in infix form</param>
 	/// <returns>Mathematical expression in postfix form</returns>
-	static string InfixToPostfix(const string& infixExpression);
+	static string InfixToPostfix(const list<string> &tokens);
 };
 

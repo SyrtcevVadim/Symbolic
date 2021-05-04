@@ -9,15 +9,16 @@ private:
     /// <summary>
     /// Initial user-provided mathematical expression
     /// </summary>
-    string initialExpression;
+    string initial;
+
     /// <summary>
     /// Mathematical expression written in infix form. Every constant inside it is replaced by it's value
     /// </summary>
-    string infixExpression;
+    string infix;
     /// <summary>
     /// Mathematical expression written in postfix form. Every parameter inside it is replaced by it's value
     /// </summary>
-    string postfixExpression;
+    string postfix;
     /// <summary>
     /// Stores parameters' values. There're 4 parameters: a, b, c, d
     /// </summary>
