@@ -45,6 +45,9 @@
     <ClCompile Include="Tests\SymParserTest.cpp">
       <Filter>Файлы заголовков\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\SymExpressionTest.cpp">
+      <Filter>Файлы заголовков\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SymConstantManager.h">

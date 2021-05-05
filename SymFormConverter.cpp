@@ -35,120 +35,107 @@ map<string, int> SymFormConverter::precedence{ { {"abs", 1},
                                                  {"-", 4}
                                                  }};
 
-
-string SymFormConverter::InfixToPostfix(const list<string> &tokens)
+list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
 {
     // Creates a stack for storing intermediate values
     stack<string> stack;
-    string result{ "" };
+    // List of tokens of result expression in postfix form
+    list<string> result;
     // Stores previous token
     string previous{ "" };
-    string input{ "" };
-    for (string s : tokens)
+
+    string str = "";
+    for (string i : tokens)
     {
-        input += s;
+        str += i;
     }
-    cout <<"\n\n\texpression: "<< input << '\n';
+    //cout << "\t\t\tExpression: " << str << '\n';
+
     // Iterates through the list of tokens
     for (string token : tokens)
     {
-        cout << "token: " << token <<'\n';
+        //cout << "token: " << token <<'\n';
         // Processing unary plus and unary minus operation
         if ((token == "+" || token == "-") && (previous.empty() || SymHelper::IsOpeningBracket(previous) || SymHelper::IsSeparator(previous) ||
             SymHelper::IsOperation(previous)))
         {
             token = "un" + token;
-            cout << "is an unary: " << token << "\n";
+            //cout << "is an unary: " << token << "\n";
             // Check the precedence of the function at the stack's top
             if (!stack.empty() && (SymHelper::IsFunction(stack.top()) || SymHelper::IsOperation(stack.top())) && (precedence[stack.top()] < precedence[token] ||
                 (precedence[stack.top()] == precedence[token] && token != "^"&&stack.top() != "^")))
             {
-                cout << stack.top() << " was poped from the stack's top\n";
-                result += stack.top() + " ";
+                //cout << stack.top() << " was poped from the stack's top\n";
+                result.push_back(stack.top());
                 stack.pop();
             }
             stack.push(token); // un+ or un-
         }
-        // If token is a decimal number, we push it to the result string
-        else if (SymHelper::IsNumber(token))
+        // If token is a decimal number, variable, parameter or constant, we simply add it to the result list of tokens
+        else if (SymHelper::IsNumber(token) || SymHelper::IsVariable(token) || SymHelper::IsParameter(token) || 
+                 SymConstantManager::IsConstant(token))
         {
-            cout << "is a number\n";
-            result += token + " ";
-        }
-        else if (SymHelper::IsVariable(token))
-        {
-            cout << "is a variable\n";
-            result += token + " ";
-        }
-        else if (SymHelper::IsParameter(token))
-        {
-            cout << "is a parameter\n";
-            result += token + " ";
-        }
-        else if (SymConstantManager::IsConstant(token))
-        {
-            cout << "is a constant\n";
-            result += token + " ";
+            result.push_back(token);
         }
         // Process opening brackets
         else if (SymHelper::IsOpeningBracket(token))
         {
-            cout << "is an opening bracket\n";
+            //cout << "is an opening bracket\n";
             stack.push(token);
         }
         // Process closing parathesis
         else if (token == ")")
         {
-            cout << "is a closing parenthesis\n";
-            // Pops everything from stack until we reach opening parenthesis
+            //cout << "is a closing round bracket\n";
+            // Pops everything from stack until we reach opening round bracket
             while (!stack.empty() && stack.top() != "(")
             {
-                result += stack.top() + " ";
+                result.push_back(stack.top());
                 stack.pop();
             }
             if (!stack.empty() && stack.top() == "(")
             {
-                // Get rid of opening paranthesis
+                // Get rid of opening round bracket
                 stack.pop();
             }
         }
         else if (token == "]")
         {
-            cout << "is a closing square bracket\n";
+            //cout << "is a closing square bracket\n";
             // Pops everything from stack until we reach opening square bracket
             while (!stack.empty() && stack.top() != "[")
             {
-                result += stack.top() + " ";
+                result.push_back(stack.top());
                 stack.pop();
             }
             if (!stack.empty() && stack.top() == "[")
             {
-                // Get rid of opening paranthesis
+                // Get rid of opening square bracket
                 stack.pop();
             }
         }
         else if (token == "}")
         {
-            cout << "is a closing curly bracket\n";
-            // Pops everything from stack until we reach opening parenthesis
+            //cout << "is a closing curly bracket\n";
+            // Pops everything from stack until we reach opening curly bracket
             while (!stack.empty() && stack.top() != "{")
             {
-                result += stack.top() + " ";
+                result.push_back(stack.top());
                 stack.pop();
             }
             if (!stack.empty() && stack.top() == "{")
             {
-                // Get rid of opening paranthesis
+                // Get rid of opening curly bracket
                 stack.pop();
             }
         }
         else if (SymHelper::IsSeparator(token))
         {
-            cout << "is a separator\n";
-            // Pops everything from the stack until we face with opening bracket
+            //cout << "is a separator\n";
+            // Pops everything from the stack until we face with opening parenthesis
             while (!stack.empty() && !SymHelper::IsOpeningBracket(stack.top()))
             {
-                result += stack.top() + " ";
+                result.push_back(stack.top());
                 stack.pop();
             }
             if (stack.empty())
@@ -158,30 +145,33 @@ string SymFormConverter::InfixToPostfix(const list<string> &tokens)
         }
         else if (SymHelper::IsFunction(token) || SymHelper::IsOperation(token))
         {
-            cout << "is an operation/function\n";
+            //cout << "is an operation/function\n";
             // every function is pushed to the stack
             // Check the precedence of the function at the stack's top
             if (!stack.empty() && (SymHelper::IsFunction(stack.top()) || SymHelper::IsOperation(stack.top())) && (precedence[stack.top()] < precedence[token] ||
                 (precedence[stack.top()] == precedence[token] && token != "^")))
             {
-                cout << stack.top() << " was poped from the stack's top\n";
-                result += stack.top() + " ";
+                //cout << stack.top() << " was poped from the stack's top\n";
+                result.push_back(stack.top());
                 stack.pop();
                 
             }
             stack.push(token);
         }
-        cout << "\tExp: " << result << "\n";
         previous = token;
     }
-    // If stack isn't empty, we pop everything from it to result
+    // If stack isn't empty, we add everything from it to the result
     while (!stack.empty())
     {
-        result += stack.top() + " ";
+        result.push_back(stack.top());
         stack.pop();
     }
-    // Trims the result string
-    result = trim(result);
-    cout << "\tResult: " << result << '\n';
+    str = "";
+    for (string i : result)
+    {
+        str += i+" ";
+    }
+    //cout << "\t\tResult: " << str << '\n';
+
     return result;
 }

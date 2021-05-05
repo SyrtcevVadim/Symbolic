@@ -77,7 +77,7 @@ bool SymHelper::IsNumber(const string &str)
                 return false;
             }
         }
-        cout << str << " is a number!\n";
+        //cout << str << " is a number!\n";
         return true;
     }
     return false;

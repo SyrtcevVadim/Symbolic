@@ -2,6 +2,7 @@
 #include<string>
 
 using std::string;
+using std::to_string;
 
 string trim(string str)
 {
@@ -16,4 +17,16 @@ string trim(string str)
 		str.erase(0, 1);
 	}
 	return str;
+}
+
+string numberToString(double number)
+{
+	string result{ to_string(number) };
+	
+	while (result.back() == '0' || result.back() == '.')
+	{
+		result.erase(result.length() - 1, 1);
+	}
+
+	return result;
 }

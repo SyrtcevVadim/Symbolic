@@ -1,3 +1,2 @@
-﻿  SymFormConverterTest.cpp
-C:\Projects\SymCalc\Tests\SymFormConverterTest.cpp(25,21): warning C4018: <: несоответствие типов со знаком и без знака
+﻿  SymExpressionTest.cpp
   SymCalc.vcxproj -> C:\Projects\SymCalc\Debug\SymCalc.exe

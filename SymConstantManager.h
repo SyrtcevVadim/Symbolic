@@ -1,7 +1,9 @@
 #pragma once
 #include<string>
+#include<list>
 #include<map>
 using std::string;
+using std::list;
 using std::map;
 
 class SymConstantManager
@@ -21,9 +23,9 @@ public:
 	/// <summary>
 	/// 
 	/// </summary>
-	/// <param name="infixExperssion"></param>
+	/// <param name="infix"></param>
 	/// <returns></returns>	
-	static bool HasConstants(const string& infixExperssion);
+	static bool HasConstants(const list<string>& infix);
 	/// <summary>
 	/// 
 	/// </summary>
@@ -41,6 +43,8 @@ public:
 	/// <param name="name"></param>
 	/// <param name="value"></param>
 	static void AlterConstantValue(const string& name, const string& value);
+
+	static string GetConstantValue(const string& name);
 
 
 };

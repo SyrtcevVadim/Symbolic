@@ -1,68 +1,69 @@
 #pragma once
 #include<string>
+#include<list>
 #include<map>
-using namespace std;
+
+using std::string;
+using std::list;
+using std::map;
 
 class SymExpression
 {
 private:
     /// <summary>
-    /// Initial user-provided mathematical expression
+    /// Initial user-provided mathematical expression in infix form
     /// </summary>
     string initial;
 
     /// <summary>
     /// Mathematical expression written in infix form. Every constant inside it is replaced by it's value
     /// </summary>
-    string infix;
+    list<string> infix;
     /// <summary>
     /// Mathematical expression written in postfix form. Every parameter inside it is replaced by it's value
     /// </summary>
-    string postfix;
+    list<string> postfix;
+
     /// <summary>
     /// Stores parameters' values. There're 4 parameters: a, b, c, d
     /// </summary>
     map<string, double> parameters;
 
     /// <summary>
-    /// Minimum possible variable's value
-    /// </summary>
-    double minimumVariableValue;
-    /// <summary>
-    /// Maximum possible variable's value
-    /// </summary>
-    double maximumVariableValue;
-
-    /// <summary>
     /// Substitutes constants' values in mathematical expression in infix form
     /// </summary>
-    /// <param name="infixExpression">Mathematical expression in infix form</param>
-    /// <returns>Mathematical expression in infix form with substituted constants' values</returns>
-    string substituteConstantValues(string infixExpression);
+    /// <param name="infix">List of tokens of mathematical expression in infix form</param>
+    /// <returns>List of tokens of mathematical expression in infix form with substituted constants' values</returns>
+    list<string> substituteConstantValues(const list<string> &infix);
 
     /// <summary>
     /// Substitutes parameters' values in mathematical expression in postfix form
     /// </summary>
-    /// <param name="postfixExpression">Mathematical expression in postfix form</param>
-    /// <returns>Mathematical expression in postfix form with substitutes parameter's values</returns>
-    string subsituteParameterValues(string postfixExpression);
+    /// <param name="postfix">List of tokens of mathematical expression in postfix form</param>
+    /// <returns>List of tokens of mathematical expression in postfix form with substitutes parameter's values</returns>
+    list<string> subsituteParameterValues(const list<string> &postfix);
 
 public:
     SymExpression();
-    SymExpression(string initialExpression);
+    SymExpression(const char* mathematicalExpression);  
+    SymExpression(string mathematicalExpression);
 
     /// <summary>
-    /// Sets the initial value of the mathematical expression
+    /// Sets the value of the mathematical expression
     /// </summary>
-    /// <param name="initialExpression">Initial mathematical expression</param>
-    void setExpression(string initialExpression);
+    void setExpression(string mathematicalExpression);
 
     /// <summary>
     /// Sets parameter's value
     /// </summary>
     /// <param name="name">Name of the parameter(a, b, c or d)</param>
     /// <param name="value">Value of the parameter</param>
-    void setParameterValue(string name, double value);
+    void setParameterValue(const string &name, double value);
+
+    /// <summary>
+    /// Returns the value of parameter
+    /// </summary>
+    double getParameterValue(const string& name);
 
     /// <summary>
     /// Sets parameter's values
@@ -71,64 +72,27 @@ public:
     /// <param name="bValue">Value of the parameter b</param>
     /// <param name="cValue">Value of the parameter c</param>
     /// <param name="dValue">Value of the parameter d</param>
-    void setParameterValues(double aValue, double bValue, double cValue, double dValue);
-
-    /// <summary>
-    /// Returns provided parameter's value
-    /// </summary>
-    /// <param name="parameterName">Name of the parameter</param>
-    /// <returns></returns>
-    double getParameterValue(string parameterName);
-
-    
+    void setParameterValues(double aValue=1.0, double bValue=1.0, double cValue=1.0, double dValue=1.0);
 
     /// <summary>
     /// Substitutes the variable's value in mathematical expression in postfix form
     /// </summary>
-    /// <param name="variableValue">Value of the variable</param>
-    /// <returns>Mathematical expression in postfix form with substituted variable's value</returns>
-    string substituteVariableValue(double variableValue);
+    /// <param name="value">Value of the variable</param>
+    /// <returns>List of tokens of mathematical expression in postfix form with substituted variable's value</returns>
+    list<string> substituteVariableValue(double value);
 
     /// <summary>
-    /// Returns the initial mathematical expression
+    /// Returns the user-provided mathematical expression
     /// </summary>
-    string getInitialExpression()const;
+    string getExpression()const;
 
     /// <summary>
-    /// Returns mathematical expression in infix form
+    /// Returns list of tokens of mathematical expression in infix form
     /// </summary>
-    /// <returns></returns>
-    string getInfixExpression()const;
+    list<string> getInfix()const;
 
     /// <summary>
-    /// Returns mathematical expression in postfix form
+    /// Returns list of tokens of mathematical expression in postfix form
     /// </summary>
-    /// <returns></returns>
-    string getPostfixExpression()const;
-
-    /// <summary>
-    /// Sets minimum variable's value
-    /// </summary>
-    /// <param name="value"></param>
-    void setMinimumVariableValue(double value);
-
-    /// <summary>
-    /// Sets maximum variable's value
-    /// </summary>
-    /// <param name="value"></param>
-    void setMaximumVariableValue(double value);
-
-    /// <summary>
-    /// Returns the minimum variable's value
-    /// </summary>
-    /// <returns></returns>
-    double getMinimumVariableValue()const;
-
-    /// <summary>
-    /// Returns the maximum variable's value
-    /// </summary>
-    /// <returns></returns>
-    double getMaximumVariableValue()const;
-
-
+    list<string> getPostfix()const;
 };

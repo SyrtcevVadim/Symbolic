@@ -11,8 +11,7 @@ using std::map;
 
 map<string, string> SymConstantManager::predefinedConstants{
 															{"pi", "3.141592"},
-															{"e", "2.718281828"}
-														   };
+															{"e", "2.718281828"}};
 
 map<string, string> SymConstantManager::userDefinedConstants;
 
@@ -26,10 +25,9 @@ bool SymConstantManager::IsConstant(const string& str)
 	return false;
 }
 
-/*bool SymConstantManager::HasConstants(const string& infixExpression)
+bool SymConstantManager::HasConstants(const list<string>& infix)
 {
-	list<string> tokens = SymParser::Split(infixExpression);
-	for (string token : tokens)
+	for (string token : infix)
 	{
 		if (IsConstant(token))
 		{
@@ -37,7 +35,7 @@ bool SymConstantManager::IsConstant(const string& str)
 		}
 	}
 	return false;
-}*/
+}
 
 void SymConstantManager::AddConstant(const string& name, const string& value)
 {
@@ -53,7 +51,6 @@ void SymConstantManager::RemoveConstant(const string& name)
 	userDefinedConstants.erase(name);
 }
 
-
 void SymConstantManager::AlterConstantValue(const string& name, const string& value)
 {
 	if (IsConstant(name))
@@ -63,5 +60,21 @@ void SymConstantManager::AlterConstantValue(const string& name, const string& va
 	else
 	{
 		throw "Constant " + name + " doen't exist! Use AddConstant method!";
+	}
+}
+
+string SymConstantManager::GetConstantValue(const string& name)
+{
+	if (predefinedConstants.find(name) != predefinedConstants.end())
+	{
+		return predefinedConstants[name];
+	}
+	else if (userDefinedConstants.find(name) != userDefinedConstants.end())
+	{
+		return userDefinedConstants[name];
+	}
+	else
+	{
+		throw "'" + name + "' doesn't exist! Add this constant firstly!";
 	}
 }

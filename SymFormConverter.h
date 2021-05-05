@@ -22,7 +22,7 @@ public:
 	/// Makes mathematical expression in postfix form from the list of tokens of mathematical expression in infix form
 	/// </summary>
 	/// <param name="tokens">List of tokens of mathematical expression in infix form</param>
-	/// <returns>Mathematical expression in postfix form</returns>
-	static string InfixToPostfix(const list<string> &tokens);
+	/// <returns>List of tokens of mathematical expression in postfix form</returns>
+	static list<string> InfixToPostfix(const list<string> &tokens);
 };
 
