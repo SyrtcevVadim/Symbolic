@@ -21,7 +21,12 @@ string trim(string str)
 
 string numberToString(double number)
 {
+	if (isnan(number) || isinf(number))
+	{
+		throw "'" + to_string(number) + "' isn't a decimal number!";
+	}
 	string result{ to_string(number) };
+	
 	
 	while (result.back() == '0' || result.back() == '.')
 	{

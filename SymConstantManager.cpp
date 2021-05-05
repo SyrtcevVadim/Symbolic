@@ -9,8 +9,7 @@ using std::string;
 using std::map;
 
 
-map<string, string> SymConstantManager::predefinedConstants{
-															{"pi", "3.141592"},
+map<string, string> SymConstantManager::predefinedConstants{{"pi", "3.141592"},
 															{"e", "2.718281828"}};
 
 map<string, string> SymConstantManager::userDefinedConstants;
