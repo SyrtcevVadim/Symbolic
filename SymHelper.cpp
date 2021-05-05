@@ -1,8 +1,9 @@
-#include "SymHelper.h"
+#include"SymHelper.h"
 #include<map>
 #include<list>
 #include<algorithm>
 #include<string>
+#include<regex>
 #include<iostream>
 
 using std::string;
@@ -10,6 +11,8 @@ using std::list;
 using std::map;
 using std::cout;
 using std::find;
+using std::regex_match;
+using std::regex;
 
 list<string> SymHelper::tokens{"(",")","[","]","{","}",
 								",",";",
@@ -64,20 +67,8 @@ list<string> SymHelper::parameters{"a","b","c","d"};
 
 bool SymHelper::IsNumber(const string &str)
 {
-    if (!str.empty())
+    if (regex_match(str, regex(R"([\+-]?[\d]+(.[\d]+)?)")))
     {
-        for (char symbol : str)
-        {
-            if ((symbol == '-' || symbol == '+') && str.size() == 1)
-            {
-                return false;
-            }
-            if (symbol < '0' || symbol > '9')
-            {
-                return false;
-            }
-        }
-        //cout << str << " is a number!\n";
         return true;
     }
     return false;

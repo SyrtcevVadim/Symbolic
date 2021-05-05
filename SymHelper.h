@@ -1,5 +1,4 @@
 #pragma once
-
 #include<map>
 #include<list>
 #include<string>
@@ -25,16 +24,6 @@ private:
     /// stores correct function names
     /// </summary>
     static list<string> functions;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    //static map<string, string> predefinedConstants;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    //static map<string, string> userDefinedConstants;
 
     /// <summary>
     /// Stores quantite of operands for every correct operation/function
@@ -91,23 +80,5 @@ public:
     /// Checks whether provided string stores a closing bracket or not
     /// </summary>
     static bool IsClosingBracket(const string &str);
-
-
-
-    /// Checks, whether string contains constants or not
-
-    // TODO class SymConstantManager
-    //static bool HasConstants(const QString& expression);
-
-    /*
-    * //static bool IsConstant(const string &str);
-    /// Create new user-defined constant with provided value
-    static void AddConstant(const QString& constant, const QString& value);
-    /// Removes constant from user-defined constants
-    static void RemoveConstant(const QString& constant);
-    /// Alters existing user-defined constant's value
-    static void AlterConstantValue(const QString& constant, const QString& value);
-    */
-
 };
 

@@ -11,6 +11,10 @@ private:
 	/// </summary>
 	static list<string> delimiters;
 
+	/// <summary>
+	/// Converts provided mathematical expression into list of tokens
+	/// </summary>
+	/// <returns>List of tokens of provided mathematical expression</returns>
 	static list<string> Split(const string& str);
 	
 public:
