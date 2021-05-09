@@ -12,28 +12,34 @@ using std::list;
 using std::stack;
 using std::cout;
 
-map<string, int> SymFormConverter::precedence{ { {"abs", 1},
-                                                 {"pow", 1},
-                                                 {"sqrt", 1},
-                                                 {"sin", 1},
-                                                 {"cos", 1},
-                                                 {"arcsin", 1},
-                                                 {"arccos", 1},
-                                                 {"arctg", 1},
-                                                 {"arcctg", 1},
-                                                 {"tg", 1},
-                                                 {"ctg", 1},
-                                                 {"lg", 1},
-                                                 {"ln", 1},
-                                                 {"log", 1},
-                                                 {"un-", 2},
-                                                 {"un+", 2},
-                                                 {"^", 2},
-                                                 {"*", 3},
-                                                 {"/", 3},
-                                                 {"+", 4},
-                                                 {"-", 4}
-                                                 }};
+map<string, int> SymFormConverter::precedence{ {
+    {"abs", 1},
+    {"pow", 1},
+    {"sqrt", 1},
+    {"sin", 1},
+    {"cos", 1},
+    {"arcsin", 1},
+    {"arccos", 1},
+    {"arctg", 1},
+    {"arctan", 1},
+    {"arcctg", 1},
+    {"arccot", 1},
+    {"arccotan", 1},
+    {"tg", 1},
+    {"tan", 1},
+    {"ctg", 1},
+    {"cot", 1},
+    {"lg", 1},                                      
+    {"ln", 1},                               
+    {"log", 1},                              
+    {"un-", 2},                                 
+    {"un+", 2},
+    {"^", 2},
+    {"*", 3},
+    {"/", 3},
+    {"+", 4},  
+    {"-", 4}                                             
+    }};
 
 list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
 {
@@ -44,11 +50,11 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
     // Stores previous token
     string previous{ "" };
 
-    string str = "";
+   /* string str = "";
     for (string i : tokens)
     {
         str += i;
-    }
+    }*/
     //cout << "\t\t\tExpression: " << str << '\n';
 
     // Iterates through the list of tokens
@@ -166,12 +172,12 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
         result.push_back(stack.top());
         stack.pop();
     }
-    str = "";
-    for (string i : result)
-    {
-        str += i+" ";
-    }
-    //cout << "\t\tResult: " << str << '\n';
+    //str = "";
+    //for (string i : result)
+    //{
+    //    str += i+" ";
+    //}
+    ////cout << "\t\tResult: " << str << '\n';
 
     return result;
 }

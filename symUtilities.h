@@ -6,3 +6,4 @@ using std::string;
 string trim(string str);
 
 string numberToString(double number);
+double stringToNumber(string str);

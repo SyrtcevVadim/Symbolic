@@ -29,38 +29,40 @@ list<string> SymHelper::tokens{"(",")","[","]","{","}",
 list<string> SymHelper::operations{"un+","un-","+","-","*","/","^"};
 
 list<string> SymHelper::functions{"abs","pow","sqr","sqrt",
-								   "sin","cos","tg","tan","ctg","cot"
+								   "sin","cos","tg","tan","ctg","cot",
 								   "arcsin","arccos","arctg","arctan","arcctg","arccot","arccotan",
 								   "ln","lg","log",
 								  };
 
-map<string, int> SymHelper::operandQuantity{{"un-", 1},
-                                             {"un+", 1},
-                                             {"+", 2},
-                                             {"-", 2},
-                                             {"*", 2},
-                                             {"/", 2},
-                                             {"^", 2},
-                                             {"abs", 1},
-                                             {"pow", 2},
-                                             {"sqrt", 1},
-                                             {"sin", 1},
-                                             {"cos", 1},
-                                             {"tg", 1},
-                                             {"tan",1},
-                                             {"ctg", 1},
-                                             {"cot", 1},
-                                             {"arcsin", 1},
-                                             {"arccos", 1},
-                                             {"arctg", 1},
-                                             {"arctan", 1},
-                                             {"arcctg", 1},
-                                             {"arccot",1},
-                                             {"arccotan", 1},
-                                             {"lg", 1},
-                                             {"ln", 1},
-                                             {"log",2},
-                                            };
+map<string, int> SymHelper::operandQuantity{
+    {"un-", 1},
+    {"un+", 1},
+    {"+", 2},
+    {"-", 2},
+    {"*", 2},
+    {"/", 2},
+    {"^", 2},
+    {"abs", 1},
+    {"pow", 2},
+    {"sqr", 1},
+    {"sqrt", 1},
+    {"sin", 1},
+    {"cos", 1},
+    {"tg", 1},
+    {"tan",1},
+    {"ctg", 1},
+    {"cot", 1},
+    {"arcsin", 1},
+    {"arccos", 1},
+    {"arctg", 1},
+    {"arctan", 1},
+    {"arcctg", 1},
+    {"arccot",1},
+    {"arccotan", 1},
+    {"lg", 1},
+    {"ln", 1},
+    {"log",2}
+};
 
 list<string> SymHelper::parameters{"a","b","c","d"};
 
@@ -127,8 +129,10 @@ bool SymHelper::IsFunction(const string &str)
     list<string>& l = SymHelper::functions;
     if (find(l.begin(), l.end(), str) != l.end())
     {
+        //cout << str << " is a function!\n";
         return true;
     }
+    //cout << str << " isn't a function!\n";
     return false;
 }
 
@@ -148,4 +152,9 @@ bool SymHelper::IsClosingBracket(const string& str)
         return true;
     }
     return false;
+}
+
+int SymHelper::GetOperandQuantity(const string& op)
+{
+    return operandQuantity[op];
 }

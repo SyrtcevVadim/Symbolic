@@ -80,5 +80,11 @@ public:
     /// Checks whether provided string stores a closing bracket or not
     /// </summary>
     static bool IsClosingBracket(const string &str);
+
+    /// <summary>
+    /// Returns the number of operands that operation/function 
+    /// requires
+    /// </summary>
+    static int GetOperandQuantity(const string& op);
 };
 

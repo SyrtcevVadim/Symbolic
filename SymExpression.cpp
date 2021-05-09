@@ -24,13 +24,13 @@ SymExpression::SymExpression(string mathematicalExpression)
 {
 	// Initialize parameters by their standart values
 	setParameterValues();
-	setExpression(mathematicalExpression);
+	set(mathematicalExpression);
 }
 
 SymExpression::SymExpression(const char* mathematicalExpression)
 {
 	setParameterValues();
-	setExpression(mathematicalExpression);
+	set(mathematicalExpression);
 }
 
 list<string> SymExpression::substituteConstantValues(const list<string> &infix)
@@ -95,7 +95,7 @@ list<string> SymExpression::substituteVariableValue(double value)
 	return result;
 }
 
-void SymExpression::setExpression(string mathematicalExpression)
+void SymExpression::set(string mathematicalExpression)
 {
 	list<string> infixList = SymParser::CreateTokenList(mathematicalExpression);
 	initial = "";
@@ -145,7 +145,7 @@ void SymExpression::setParameterValues(double aValue, double bValue, double cVal
 	setParameterValue("d", dValue);
 }
 
-string SymExpression::getExpression()const
+string SymExpression::get()const
 {
 	return initial;
 }

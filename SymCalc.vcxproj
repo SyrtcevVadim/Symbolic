@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SymCalculator.cpp" />
     <ClCompile Include="SymConstantManager.cpp" />
     <ClCompile Include="SymExpression.cpp" />
     <ClCompile Include="SymFormConverter.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="SymParser.cpp" />
     <ClCompile Include="symUtilities.cpp" />
     <ClCompile Include="Tests\main.cpp" />
+    <ClCompile Include="Tests\SymCalculatorTest.cpp" />
     <ClCompile Include="Tests\SymConstantManagerTest.cpp" />
     <ClCompile Include="Tests\SymExpressionTest.cpp" />
     <ClCompile Include="Tests\SymFormConverterTest.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="Tests\symUtilitiesTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SymCalculator.h" />
     <ClInclude Include="SymConstantManager.h" />
     <ClInclude Include="SymExpression.h" />
     <ClInclude Include="SymFormConverter.h" />

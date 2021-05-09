@@ -57,6 +57,12 @@
     <ClCompile Include="Tests\SymConstantManagerTest.cpp">
       <Filter>Файлы заголовков\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="SymCalculator.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymCalculatorTest.cpp">
+      <Filter>Файлы заголовков\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SymConstantManager.h">
@@ -76,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="symUtilities.h">
       <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="SymCalculator.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -51,7 +51,7 @@ public:
     /// <summary>
     /// Sets the value of the mathematical expression
     /// </summary>
-    void setExpression(string mathematicalExpression);
+    void set(string mathematicalExpression);
 
     /// <summary>
     /// Sets parameter's value
@@ -84,7 +84,7 @@ public:
     /// <summary>
     /// Returns the user-provided mathematical expression
     /// </summary>
-    string getExpression()const;
+    string get()const;
 
     /// <summary>
     /// Returns list of tokens of mathematical expression in infix form

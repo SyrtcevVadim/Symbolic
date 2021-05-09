@@ -1,21 +1,16 @@
 #include"symUtilities.h"
+#include"SymHelper.h"
+#include<sstream>
 #include<string>
 
 using std::string;
+using std::stringstream;
 using std::to_string;
 
 string trim(string str)
 {
-	// Deletes spaces from the end of the string
-	while (str.back() == ' ')
-	{
-		str.erase(str.size() - 1, 1);
-	}
-	// Deletes spaces from the begining of the string
-	while (str.front() == ' ')
-	{
-		str.erase(0, 1);
-	}
+	stringstream ss{ str };
+	ss >> str;
 	return str;
 }
 
@@ -25,13 +20,22 @@ string numberToString(double number)
 	{
 		throw "'" + to_string(number) + "' isn't a decimal number!";
 	}
-	string result{ to_string(number) };
-	
-	
-	while (result.back() == '0' || result.back() == '.')
-	{
-		result.erase(result.length() - 1, 1);
-	}
+	stringstream ss;
+	ss << number;
+	string result;
+	ss >> result;
+	return result;
+}
 
+double stringToNumber(string str)
+{
+	// Checks the correctness of the number
+	if (!SymHelper::IsNumber(str))
+	{
+		throw "'" + str +"' isn't a correct decimal number!";
+	}
+	stringstream ss{ str };
+	double result;
+	ss >> result;
 	return result;
 }

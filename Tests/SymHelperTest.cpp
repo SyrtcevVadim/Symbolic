@@ -66,7 +66,7 @@ TEST_CASE("Test of IsOperation() function")
 TEST_CASE("Test of IsFunction() function")
 {
 	string testFunction = GENERATE(	"abs", "pow", "sqr", "sqrt",
-									"sin", "cos", "tg", "tan", "ctg", "cot"
+									"sin", "cos", "tg", "tan", "ctg", "cot",
 									"arcsin", "arccos", "arctg", "arctan", "arcctg", "arccot", "arccotan",
 									"ln", "lg", "log");
 	CHECK(SymHelper::IsFunction(testFunction));

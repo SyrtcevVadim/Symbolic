@@ -8,19 +8,19 @@ TEST_CASE("Test of constructor function")
 {
 	INFO("Constructor with string argument");
 	SymExpression test{"x+1"};
-	CHECK(test.getExpression() == "x+1");
+	CHECK(test.get() == "x+1");
 	test = "5+e";
-	CHECK(test.getExpression() == "5+e");
+	CHECK(test.get() == "5+e");
 }
 
-TEST_CASE("Test of setExpression() function")
+TEST_CASE("Test of set() function")
 {
 	SymExpression test;
-	test.setExpression("sin  (x \t)\n");
-	CHECK(test.getExpression() == "sin(x)");
+	test.set("sin  (x \t)\n");
+	CHECK(test.get() == "sin(x)");
 	string newExp{ " 1+\n \t2 +3^ 4   " };
-	test.setExpression(newExp);
-	CHECK(test.getExpression() == "1+2+3^4");
+	test.set(newExp);
+	CHECK(test.get() == "1+2+3^4");
 }
 
 TEST_CASE("Test of setParameterValue() function")
