@@ -1,6 +1,10 @@
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
+//#define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../SymParser.h"
 #include<string>
+#include<chrono>
+#include<thread>
 #include<list>
 
 
@@ -15,3 +19,18 @@ TEST_CASE("Test of CreateTokenList() function")
 	CHECK(SymParser::CreateTokenList("\n \t") == list<string>{});
 }
 
+// Benchmarking
+#ifdef SYM_USE_BENCHMARKING
+TEST_CASE("")
+{
+	BENCHMARK("CreateTokenList(). Simple function")
+	{
+		return SymParser::CreateTokenList("x+x+x^2");
+	};
+
+	BENCHMARK("CreateTokenList(). Difficult function")
+	{
+		return SymParser::CreateTokenList("x+sin(cos(tg(ctg(x+log(5,25)))))-14");
+	};
+}
+#endif

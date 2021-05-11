@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Файлы заголовков\Tests">
+    <Filter Include="Исходные файлы\Tests">
       <UniqueIdentifier>{c7130141-d5ac-4f70-a140-bc0e2b03ac9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -37,31 +37,31 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Tests\main.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Tests\SymFormConverterTest.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Tests\SymParserTest.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Tests\SymExpressionTest.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Tests\symUtilitiesTest.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Tests\SymHelperTest.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Tests\SymConstantManagerTest.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
     <ClCompile Include="SymCalculator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Tests\SymCalculatorTest.cpp">
-      <Filter>Файлы заголовков\Tests</Filter>
+      <Filter>Исходные файлы\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,5 +86,8 @@
     <ClInclude Include="SymCalculator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

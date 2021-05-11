@@ -1,7 +1,7 @@
 #include "SymCalculator.h"
 #include "SymHelper.h"
 #include "symUtilities.h"
-#include<cmath>
+#include<math.h>
 #include<iostream>
 #include<stack>
 #include<string>

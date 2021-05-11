@@ -1,6 +1,8 @@
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../SymParser.h"
 #include"../SymFormConverter.h"
+
 #include<string>
 #include<list>
 #include<vector>
@@ -31,3 +33,14 @@ TEST_CASE("Test of InfixToPostfix() function")
 		CHECK(SymFormConverter::InfixToPostfix(SymParser::CreateTokenList(input[i])) == output[i]);
 	}
 }
+
+// Benchmarking
+#ifdef SYM_USE_BENCHMARKING
+TEST_CASE("")
+{
+	BENCHMARK("InfixToPostfix()")
+	{
+		return SymFormConverter::InfixToPostfix(list<string>{"x", "+", "1", "+", "a", "+", "pi", "+", "(", "1", "+", "sin", "(", "x", ")", ")"});
+	};
+}
+#endif

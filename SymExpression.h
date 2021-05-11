@@ -56,7 +56,7 @@ public:
     /// <summary>
     /// Sets parameter's value
     /// </summary>
-    /// <param name="name">Name of the parameter(a, b, c or d)</param>
+    /// <param name="name">Name of the parameter(a, b, c, d)</param>
     /// <param name="value">Value of the parameter</param>
     void setParameterValue(const string &name, double value);
 
@@ -87,12 +87,12 @@ public:
     string get()const;
 
     /// <summary>
-    /// Returns list of tokens of mathematical expression in infix form
+    /// Returns the list of tokens of mathematical expression in infix form
     /// </summary>
     list<string> getInfix()const;
 
     /// <summary>
-    /// Returns list of tokens of mathematical expression in postfix form
+    /// Returns the list of tokens of mathematical expression in postfix form
     /// </summary>
     list<string> getPostfix()const;
 };

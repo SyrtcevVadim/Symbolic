@@ -1,13 +1,14 @@
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../SymCalculator.h"
 #include"../SymExpression.h"
 #include<string>
-#include<cmath>
+#include<math.h>
 #include<vector>
 using std::vector;
 using std::string;
 
-
+// Assertions 
 TEST_CASE("Test of compute() function(simple functions/operations)")
 {
 	// Stores variable's value
@@ -39,5 +40,13 @@ TEST_CASE("Test of compute() function(simple functions/operations)")
 		exp.set(expressions[i]);
 		INFO(expressions[i]);
 		CHECK(calc.compute(x) == Approx(results[i]).margin(.01));
-	}
+	}	
 }
+
+// Benchmarking
+#ifdef SYM_USE_BENCHMARKING
+TEST_CASE("")
+{
+
+}
+#endif

@@ -1,3 +1,4 @@
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../SymHelper.h"
 
@@ -83,3 +84,8 @@ TEST_CASE("Test of IsClosingBracket() function")
 	string testBracket = GENERATE(")", "]", "}");
 	CHECK(SymHelper::IsClosingBracket(testBracket));
 }
+
+// Benchmarking
+#ifdef SYM_USE_BENCHMARKING
+TEST_CASE("")
+#endif

@@ -1,3 +1,4 @@
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../SymConstantManager.h"
 #include"../SymParser.h"
@@ -66,3 +67,11 @@ TEST_CASE("Test of AlterConstantValue() function")
 
 	CHECK_THROWS(SymConstantManager::AlterConstantValue("myConstant", "x+x"));
 }
+
+// Benchmarking
+#ifdef SYM_USE_BENCHMARKING
+TEST_CASE("")
+{
+
+}
+#endif

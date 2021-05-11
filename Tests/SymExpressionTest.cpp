@@ -1,3 +1,5 @@
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
+#define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../SymExpression.h"
 #include<string>
@@ -11,6 +13,8 @@ TEST_CASE("Test of constructor function")
 	CHECK(test.get() == "x+1");
 	test = "5+e";
 	CHECK(test.get() == "5+e");
+
+	
 }
 
 TEST_CASE("Test of set() function")
@@ -63,8 +67,53 @@ TEST_CASE("Test of getInfix() function")
 	CHECK(test.getInfix() == list<string>{"2.718281828", "+", "1"});
 }
 
-TEST_CASE("Test of getPostfix function")
+TEST_CASE("Test of getPostfix() function")
 {
 	SymExpression test{ "x+a" };
 	CHECK(test.getPostfix() == list<string>{"x", "1", "+"});
 }
+
+// Benchmarking
+#ifdef SYM_USE_BENCHMARKING
+TEST_CASE("")
+{
+	SymExpression exp;
+	BENCHMARK("Constructor")
+	{
+		return SymExpression("x+1+2-tg(ctg(a+b+c+d))/4");
+	};
+
+	BENCHMARK("set()")
+	{
+		return exp.set("1+2+3+x+tg(x)/sin(x)*log(5,25)");
+	};
+
+	BENCHMARK("setParameterValue()")
+	{
+		exp.setParameterValue("a", 15);
+		exp.setParameterValue("b", 8);
+		exp.setParameterValue("c", 123);
+		exp.setParameterValue("d", 55'555);
+	};
+
+	BENCHMARK("setParameterValues()")
+	{
+		exp.setParameterValues(15, 8, 123, 55'555);
+	};
+
+	BENCHMARK("substituteVariableValue()")
+	{
+		exp.substituteVariableValue(123.7324);
+	};
+
+	BENCHMARK("getInfix()")
+	{
+		return exp.getInfix();
+	};
+
+	BENCHMARK("getPostfix()")
+	{
+		return exp.getPostfix();
+	};
+}
+#endif
