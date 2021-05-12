@@ -1,4 +1,0 @@
-// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
-// (например, имена функций и макросов).
-// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
-#define BENCHMARK(__VA_ARGS__) INTERNAL_CATCH_BENCHMARK(INTERNAL_CATCH_UNIQUE_NAME(____C_A_T_C_H____B_E_N_C_H____), INTERNAL_CATCH_GET_1_ARG(__VA_ARGS__,,), INTERNAL_CATCH_GET_2_ARG(__VA_ARGS__,,))
