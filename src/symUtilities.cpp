@@ -16,10 +16,6 @@ string trim(string str)
 
 string numberToString(double number)
 {
-	if (isnan(number) || isinf(number))
-	{
-		throw "'" + to_string(number) + "' isn't a decimal number!";
-	}
 	stringstream ss;
 	ss << number;
 	string result;
@@ -30,10 +26,10 @@ string numberToString(double number)
 double stringToNumber(string str)
 {
 	// Checks the correctness of the number
-	if (!SymHelper::IsNumber(str))
-	{
-		throw "'" + str +"' isn't a correct decimal number!";
-	}
+	//if (!SymHelper::IsNumber(str))
+	//{
+	//	throw "'" + str +"' isn't a correct decimal number!. In stringToNumber() function";
+	//}
 	stringstream ss{ str };
 	double result;
 	ss >> result;

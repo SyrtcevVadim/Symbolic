@@ -11,21 +11,21 @@ class SymExpression
 {
 private:
     /// <summary>
-    /// Initial user-provided mathematical expression in infix form
+    /// Initial user-provided mathematical expression
     /// </summary>
     string initial;
 
     /// <summary>
-    /// Mathematical expression written in infix form. Every constant inside it is replaced by it's value
+    /// List of tokens of a mathematical expression written in infix form. Every constant inside it is replaced by it's value
     /// </summary>
     list<string> infix;
     /// <summary>
-    /// Mathematical expression written in postfix form. Every parameter inside it is replaced by it's value
+    /// List of tokens of a mathematical expression written in postfix form. Every constant and parameter inside it is replaced by it's value
     /// </summary>
     list<string> postfix;
 
     /// <summary>
-    /// Stores parameters' values. There're 4 parameters: a, b, c, d
+    /// Stores parameters' values. There're only 4 parameters: a, b, c, d
     /// </summary>
     map<string, double> parameters;
 
@@ -61,12 +61,12 @@ public:
     void setParameterValue(const string &name, double value);
 
     /// <summary>
-    /// Returns the value of parameter
+    /// Returns the value of the parameter by it's name
     /// </summary>
     double getParameterValue(const string& name);
 
     /// <summary>
-    /// Sets parameter's values
+    /// Sets the parameter's values
     /// </summary>
     /// <param name="aValue">Value of the parameter a</param>
     /// <param name="bValue">Value of the parameter b</param>

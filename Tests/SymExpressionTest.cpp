@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
 #define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
-#include"../SymExpression.h"
+#include"../src/SymExpression.h"
 #include<string>
 
 using std::string;
@@ -75,7 +75,7 @@ TEST_CASE("Test of getPostfix() function")
 
 // Benchmarking
 #ifdef SYM_USE_BENCHMARKING
-TEST_CASE("")
+TEST_CASE("SymExpression class")
 {
 	SymExpression exp;
 	BENCHMARK("Constructor")
@@ -94,16 +94,17 @@ TEST_CASE("")
 		exp.setParameterValue("b", 8);
 		exp.setParameterValue("c", 123);
 		exp.setParameterValue("d", 55'555);
+		return;
 	};
 
 	BENCHMARK("setParameterValues()")
 	{
-		exp.setParameterValues(15, 8, 123, 55'555);
+		return exp.setParameterValues(15, 8, 123, 55'555);
 	};
 
 	BENCHMARK("substituteVariableValue()")
 	{
-		exp.substituteVariableValue(123.7324);
+		return exp.substituteVariableValue(123.7324);
 	};
 
 	BENCHMARK("getInfix()")

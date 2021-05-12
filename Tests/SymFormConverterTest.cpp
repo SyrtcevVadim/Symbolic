@@ -1,7 +1,9 @@
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
+#define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
-#include"../SymParser.h"
-#include"../SymFormConverter.h"
+#include"../src/SymExpression.h"
+#include"../src/SymParser.h"
+#include"../src/SymFormConverter.h"
 
 #include<string>
 #include<list>
@@ -36,11 +38,12 @@ TEST_CASE("Test of InfixToPostfix() function")
 
 // Benchmarking
 #ifdef SYM_USE_BENCHMARKING
-TEST_CASE("")
+TEST_CASE("SymFormConverter class")
 {
+	SymExpression exp("x+1+a+pi+(1+sin(x))+a*x^3+b*x^2+c*x+d - 14445.82*tg(x^2-54)/ln(log(5,155*x))");
 	BENCHMARK("InfixToPostfix()")
 	{
-		return SymFormConverter::InfixToPostfix(list<string>{"x", "+", "1", "+", "a", "+", "pi", "+", "(", "1", "+", "sin", "(", "x", ")", ")"});
+		return SymFormConverter::InfixToPostfix(exp.getInfix());
 	};
 }
 #endif

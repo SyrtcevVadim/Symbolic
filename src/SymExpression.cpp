@@ -17,7 +17,7 @@ SymExpression::SymExpression()
 {
 	// Initialize parameters by their standart values
 	setParameterValues();
-	initial = "";
+	set("");
 }
 
 SymExpression::SymExpression(string mathematicalExpression)
@@ -76,7 +76,7 @@ list<string> SymExpression::substituteVariableValue(double value)
 {
 	if (isnan(value) || isinf(value))
 	{
-		throw "'" + to_string(value) + "' isn't a decimal number! Function substituteVariableValue() accepts only decimal numbers";
+		throw "'" + to_string(value) + "' isn't a decimal number! In substituteVariableValue() function";
 	}
 
 	list<string> result;
@@ -99,7 +99,7 @@ void SymExpression::set(string mathematicalExpression)
 {
 	list<string> infixList = SymParser::CreateTokenList(mathematicalExpression);
 	initial = "";
-	// Brings the initial and infix expression to the standart view(space between every pair of tokens without any excess spaces)
+	// Brings the initial expression to the standart view(expression without any spaces)
 	for (string token : infixList)
 	{
 		initial += token;
@@ -115,13 +115,13 @@ void SymExpression::setParameterValue(const string &name, double value)
 {
 	if (!SymHelper::IsParameter(name))
 	{
-		throw "'" + name + "' isn't a parameter! There're only four parameters: 'a','b','c','d'";
+		throw "'" + name + "' isn't a parameter! There're only four parameters: 'a','b','c','d'. In setParameterValue() function";
 	}
 	else
 	{
 		if (isinf(value) || isnan(value))
 		{
-			throw "'" + numberToString(value) + "' isn't a decimal number!";
+			throw "'" + numberToString(value) + "' isn't a decimal number! In setParameterValue() function";
 			
 		}
 		parameters[name] = value;
@@ -132,7 +132,7 @@ double SymExpression::getParameterValue(const string& name)
 {
 	if (!SymHelper::IsParameter(name))
 	{
-		throw "'" + name + "' isn't a parameter! There're only four parameters: 'a','b','c','d'";
+		throw "'" + name + "' isn't a parameter! There're only four parameters: 'a','b','c','d'. In getParameterValue() function";
 	}
 	return parameters[name];
 }

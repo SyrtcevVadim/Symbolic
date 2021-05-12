@@ -202,7 +202,6 @@ double SymCalculator::compute(double variableValue)
 				double firstOperand = stringToNumber(stack.top());
 				stack.pop();
 				stack.push(numberToString(functionHandlers[token](firstOperand, secondOperand)));
-				
 			}
 		}
 	}

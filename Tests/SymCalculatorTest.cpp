@@ -1,7 +1,8 @@
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
+#define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
-#include"../SymCalculator.h"
-#include"../SymExpression.h"
+#include"../src/SymCalculator.h"
+#include"../src/SymExpression.h"
 #include<string>
 #include<math.h>
 #include<vector>
@@ -45,8 +46,22 @@ TEST_CASE("Test of compute() function(simple functions/operations)")
 
 // Benchmarking
 #ifdef SYM_USE_BENCHMARKING
-TEST_CASE("")
+TEST_CASE("SymCalculator class")
 {
+	SymExpression exp("x+x+x+sin(x*3)+cos(x)+tg(x+1)+ctg(x*3)/log(5,25)-(x^2*x^1*x-x^2)");
+	SymCalculator calculator(&exp);
 
+	BENCHMARK("compute() 1 value")
+	{
+		calculator.compute(3.7);
+	};
+
+	BENCHMARK("compute() 100 values")
+	{
+		for (int i{ 0 }; i < 100; i++)
+		{
+			calculator.compute(i);
+		}
+	};
 }
 #endif

@@ -1,7 +1,9 @@
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
+//#define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
-#include"../SymConstantManager.h"
-#include"../SymParser.h"
+#include"../src/SymConstantManager.h"
+#include"../src/SymExpression.h"
+#include"../src/SymParser.h"
 #include<string>
 
 using std::string;
@@ -11,7 +13,7 @@ TEST_CASE("Test of IsConstant() function(positive case)")
 	string testConstant = GENERATE("e", "pi");
 	CHECK(SymConstantManager::IsConstant(testConstant));
 }
-TEST_CASE("Test of IsConstant() functino(negative case)")
+TEST_CASE("Test of IsConstant() function(negative case)")
 {
 	string testConstant = GENERATE("ABRA", "ex", "pim");
 	CHECK_FALSE(SymConstantManager::IsConstant(testConstant));
@@ -70,8 +72,28 @@ TEST_CASE("Test of AlterConstantValue() function")
 
 // Benchmarking
 #ifdef SYM_USE_BENCHMARKING
-TEST_CASE("")
+TEST_CASE("SymConstantManager class")
 {
+	SymExpression expWithConstants("x+sin(x)-tg(54)*log(log(5,25), pi)*e^x");
+	SymExpression expWithoutConstants("arcsin(	4*x)-52*x^x-473*x^3+2*x^2-x*4 + (a*x^2+b*x+c)/(6*x^10)");
+	BENCHMARK("IsConstant()(positive)")
+	{
+		return SymConstantManager::IsConstant("e");
+	};
 
+	BENCHMARK("IsConstant()(negative)")
+	{
+		return SymConstantManager::IsConstant("MyConstant");
+	};
+
+	BENCHMARK("HasConstants()(positive)")
+	{
+		return SymConstantManager::HasConstants(expWithConstants.getInfix());
+	};
+
+	BENCHMARK("HasConstants()(negative)")
+	{
+		return SymConstantManager::HasConstants(expWithoutConstants.getInfix());
+	};
 }
 #endif

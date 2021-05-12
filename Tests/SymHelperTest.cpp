@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
-#include"../SymHelper.h"
+#include"../src/SymHelper.h"
 
 TEST_CASE("Test of IsNumber() function(positive case)")
 {
@@ -54,7 +54,7 @@ TEST_CASE("Test of IsCorrect() function(positive case)")
 TEST_CASE("Test of IsCorrect() function(negative case)")
 {
 	string testToken = GENERATE("abra","sinx","tang",
-								"@","#","$","%","&","\\","~","!");
+								"@","#","$","%","&","\\","~","!","_","|");
 	CHECK_FALSE(SymHelper::IsCorrect(testToken));
 }
 
@@ -84,8 +84,3 @@ TEST_CASE("Test of IsClosingBracket() function")
 	string testBracket = GENERATE(")", "]", "}");
 	CHECK(SymHelper::IsClosingBracket(testBracket));
 }
-
-// Benchmarking
-#ifdef SYM_USE_BENCHMARKING
-TEST_CASE("")
-#endif

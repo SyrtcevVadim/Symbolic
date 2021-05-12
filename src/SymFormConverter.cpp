@@ -50,12 +50,11 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
     // Stores previous token
     string previous{ "" };
 
-   /* string str = "";
+    string str = "";
     for (string i : tokens)
     {
         str += i;
-    }*/
-    //cout << "\t\t\tExpression: " << str << '\n';
+    }
 
     // Iterates through the list of tokens
     for (string token : tokens)
@@ -146,7 +145,7 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
             }
             if (stack.empty())
             {
-                throw "Opening bracket inside the provided mathematical expression is missed";
+                throw "Opening bracket inside"+str+" is missed";
             }
         }
         else if (SymHelper::IsFunction(token) || SymHelper::IsOperation(token))

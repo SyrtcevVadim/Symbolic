@@ -1,5 +1,7 @@
+#define SYM_USE_BENCHMARKING
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
-#include"../symUtilities.h"
+#include"../src/symUtilities.h"
 #include<string>
 
 using std::string;
@@ -36,5 +38,25 @@ TEST_CASE("Test of stringToNumber() function")
 
 	CHECK_THROWS(stringToNumber("Pancakes"));
 	CHECK_THROWS(stringToNumber("55..332"));
-
 }
+
+// Benchmarking
+#ifdef SYM_USE_BENCHMARKING
+TEST_CASE("symUtilities")
+{
+	BENCHMARK("trim()")
+	{
+		return trim("   ab     ");
+	};
+
+	BENCHMARK("numberToString()")
+	{
+		return numberToString(123456789.9876543);
+	};
+
+	BENCHMARK("stringToNumber()")
+	{
+		return stringToNumber("342423525.99324432");
+	};
+}
+#endif
