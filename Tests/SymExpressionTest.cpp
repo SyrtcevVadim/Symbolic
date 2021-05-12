@@ -48,17 +48,6 @@ TEST_CASE("Test of setParameterValues() function")
 	CHECK(test.getParameterValue("d") == 5.0);
 }
 
-TEST_CASE("Test of substituteVariableValue() function")
-{
-	SymExpression test("x+1");
-	CHECK(test.substituteVariableValue(11.1) == list<string>{"11.1","1","+"});
-	test = "x+x+x+(x+1)";
-	CHECK(test.substituteVariableValue(3.12) == list<string>{"3.12", "3.12", "+", "3.12", "+", "3.12", "1", "+", "+"});
-	double zero{ 0.0 };
-	CHECK_THROWS(test.substituteVariableValue(1.0 / zero));
-	CHECK_THROWS(test.substituteVariableValue(0 / zero));
-}
-
 TEST_CASE("Test of getInfix() function")
 {
 	SymExpression test("x+1");
@@ -70,7 +59,7 @@ TEST_CASE("Test of getInfix() function")
 TEST_CASE("Test of getPostfix() function")
 {
 	SymExpression test{ "x+a" };
-	CHECK(test.getPostfix() == list<string>{"x", "1", "+"});
+	CHECK(test.getPostfix() == list<string>{"x", "a", "+"});
 }
 
 // Benchmarking
@@ -100,11 +89,6 @@ TEST_CASE("SymExpression class")
 	BENCHMARK("setParameterValues()")
 	{
 		return exp.setParameterValues(15, 8, 123, 55'555);
-	};
-
-	BENCHMARK("substituteVariableValue()")
-	{
-		return exp.substituteVariableValue(123.7324);
 	};
 
 	BENCHMARK("getInfix()")

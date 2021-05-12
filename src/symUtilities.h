@@ -9,4 +9,4 @@ string trim(string str);
 string numberToString(double number);
 
 /// Converts the string into the integer
-double stringToNumber(string str);
+double stringToNumber(string &str);

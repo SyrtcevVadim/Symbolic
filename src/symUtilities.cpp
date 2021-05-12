@@ -23,7 +23,7 @@ string numberToString(double number)
 	return result;
 }
 
-double stringToNumber(string str)
+double stringToNumber(string &str)
 {
 	// Checks the correctness of the number
 	//if (!SymHelper::IsNumber(str))

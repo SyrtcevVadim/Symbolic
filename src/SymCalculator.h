@@ -19,7 +19,7 @@ private:
 	/// <summary>
 	/// Mathematical expression for providing calculations
 	/// </summary>
-	SymExpression* mathExpression;
+	SymExpression& mathExpression;
 
 	static double nothing(double value, double);
 
@@ -79,8 +79,7 @@ private:
 
 public:
 	SymCalculator() = default;
-	SymCalculator(SymExpression* mathematicalExpression);
-	void setExpression(SymExpression *mathematicalExpression);
+	SymCalculator(SymExpression &mathematicalExpression);
 	/// <summary>
 	/// Caclulates the value of mathematical expression with
 	/// substituted variable's value

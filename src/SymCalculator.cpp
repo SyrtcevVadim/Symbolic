@@ -1,7 +1,7 @@
 #include "SymCalculator.h"
 #include "SymHelper.h"
 #include "symUtilities.h"
-#include<math.h>
+#include<cmath>
 #include<iostream>
 #include<stack>
 #include<string>
@@ -39,13 +39,8 @@ map<string, function<double(double, double)>> SymCalculator::functionHandlers{
 	{"lg", decimalLogarithm},
 	{"log", logarithm}};
 
-SymCalculator::SymCalculator(SymExpression* mathematicalExpression) :mathExpression(mathematicalExpression)
-{}
+SymCalculator::SymCalculator(SymExpression& mathematicalExpression) : mathExpression(mathematicalExpression) {}
 
-void SymCalculator::setExpression(SymExpression* mathematicalExpression)
-{
-	mathExpression = mathematicalExpression;
-}
 
 double SymCalculator::nothing(double value, double)
 {
@@ -155,22 +150,25 @@ double SymCalculator::logarithm(double base, double value)
 
 double SymCalculator::compute(double variableValue)
 {
-	list<string> postfix = mathExpression->substituteVariableValue(variableValue);
-	stack<string> stack;
-	//for (string token : postfix)
-	//{
-	//	cout << token << " ";
-	//}
-	//cout << '\n';
+	list<string> postfix = mathExpression.getPostfix();
+	stack<double> stack;
 
-	for (string token : postfix)
+	for (const string &token : postfix)
 	{
 		//cout << "\nCurrent token: " << token << "\n";
 		// Pushs every number to stack of intermediate values
 		if (SymHelper::IsNumber(token))
 		{
 			//cout << "Is a number!\n";
-			stack.push(token);
+			stack.push(stringToNumber(token));
+		}
+		else if (SymHelper::IsVariable(token))
+		{
+			stack.push(variableValue);
+		}
+		else if (SymHelper::IsParameter(token))
+		{
+			stack.push(mathExpression.getParameterValue(token));
 		}
 		else if (SymHelper::IsOperation(token) ||
 			SymHelper::IsFunction(token))
@@ -191,22 +189,22 @@ double SymCalculator::compute(double variableValue)
 			
 			if (operandQuantity == 1)
 			{
-				double secondOperand = stringToNumber(stack.top());
+				double secondOperand = stack.top();
 				stack.pop();
-				stack.push(numberToString(functionHandlers[token](secondOperand, 0.0)));
+				stack.push(functionHandlers[token](secondOperand, 0.0));
 			}
 			else if (operandQuantity == 2)
 			{
-				double secondOperand = stringToNumber(stack.top());
+				double secondOperand = stack.top();
 				stack.pop();
-				double firstOperand = stringToNumber(stack.top());
+				double firstOperand = stack.top();
 				stack.pop();
-				stack.push(numberToString(functionHandlers[token](firstOperand, secondOperand)));
+				stack.push(functionHandlers[token](firstOperand, secondOperand));
 			}
 		}
 	}
 
 	// Fetching the result;
 	//cout << "result is: " << stack.top() << '\n';
-	return stringToNumber(stack.top());
+	return stack.top();
 }

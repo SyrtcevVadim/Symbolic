@@ -20,7 +20,7 @@ private:
     /// </summary>
     list<string> infix;
     /// <summary>
-    /// List of tokens of a mathematical expression written in postfix form. Every constant and parameter inside it is replaced by it's value
+    /// List of tokens of a mathematical expression written in postfix form. Every constant inside it is replaced by it's value
     /// </summary>
     list<string> postfix;
 
@@ -35,13 +35,6 @@ private:
     /// <param name="infix">List of tokens of mathematical expression in infix form</param>
     /// <returns>List of tokens of mathematical expression in infix form with substituted constants' values</returns>
     list<string> substituteConstantValues(const list<string> &infix);
-
-    /// <summary>
-    /// Substitutes parameters' values in mathematical expression in postfix form
-    /// </summary>
-    /// <param name="postfix">List of tokens of mathematical expression in postfix form</param>
-    /// <returns>List of tokens of mathematical expression in postfix form with substitutes parameter's values</returns>
-    list<string> subsituteParameterValues(const list<string> &postfix);
 
 public:
     SymExpression();
@@ -75,13 +68,6 @@ public:
     void setParameterValues(double aValue=1.0, double bValue=1.0, double cValue=1.0, double dValue=1.0);
 
     /// <summary>
-    /// Substitutes the variable's value in mathematical expression in postfix form
-    /// </summary>
-    /// <param name="value">Value of the variable</param>
-    /// <returns>List of tokens of mathematical expression in postfix form with substituted variable's value</returns>
-    list<string> substituteVariableValue(double value);
-
-    /// <summary>
     /// Returns the user-provided mathematical expression
     /// </summary>
     string get()const;
@@ -89,10 +75,10 @@ public:
     /// <summary>
     /// Returns the list of tokens of mathematical expression in infix form
     /// </summary>
-    list<string> getInfix()const;
+    list<string>& getInfix();
 
     /// <summary>
     /// Returns the list of tokens of mathematical expression in postfix form
     /// </summary>
-    list<string> getPostfix()const;
+    list<string>& getPostfix();
 };

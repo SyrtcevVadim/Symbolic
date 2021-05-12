@@ -156,6 +156,7 @@
     <ClCompile Include="SymHelper.cpp" />
     <ClCompile Include="SymParser.cpp" />
     <ClCompile Include="symUtilities.cpp" />
+    <ClCompile Include="SymVerifier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SymCalculator.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="SymHelper.h" />
     <ClInclude Include="SymParser.h" />
     <ClInclude Include="symUtilities.h" />
+    <ClInclude Include="SymVerifier.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

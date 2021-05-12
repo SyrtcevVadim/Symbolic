@@ -35,7 +35,7 @@ TEST_CASE("Test of compute() function(simple functions/operations)")
 		log(25.0) / log(5), log(1) / log(7), log(x) / log(8) });
 
 	SymExpression exp;
-	SymCalculator calc(&exp);
+	SymCalculator calc(exp);
 	for (size_t i{ 0 }; i < expressions.size(); i++)
 	{
 		exp.set(expressions[i]);
@@ -49,7 +49,7 @@ TEST_CASE("Test of compute() function(simple functions/operations)")
 TEST_CASE("SymCalculator class")
 {
 	SymExpression exp("x+x+x+sin(x*3)+cos(x)+tg(x+1)+ctg(x*3)/log(5,25)-(x^2*x^1*x-x^2)");
-	SymCalculator calculator(&exp);
+	SymCalculator calculator(exp);
 
 	BENCHMARK("compute() 1 value")
 	{

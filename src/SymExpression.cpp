@@ -55,46 +55,6 @@ list<string> SymExpression::substituteConstantValues(const list<string> &infix)
 	return temp;
 }
 
-list<string> SymExpression::subsituteParameterValues(const list<string> &postfix)
-{
-	list<string> result;
-	for (string token : postfix)
-	{
-		if (SymHelper::IsParameter(token))
-		{
-			result.push_back(numberToString(parameters[token]));
-		}
-		else
-		{
-			result.push_back(token);
-		}
-	}
-	return result;
-}
-
-list<string> SymExpression::substituteVariableValue(double value)
-{
-	if (isnan(value) || isinf(value))
-	{
-		throw "'" + to_string(value) + "' isn't a decimal number! In substituteVariableValue() function";
-	}
-
-	list<string> result;
-
-	for (string token : postfix)
-	{
-		if (SymHelper::IsVariable(token))
-		{
-			result.push_back(numberToString(value));
-		}
-		else
-		{
-			result.push_back(token);
-		}
-	}
-	return result;
-}
-
 void SymExpression::set(string mathematicalExpression)
 {
 	list<string> infixList = SymParser::CreateTokenList(mathematicalExpression);
@@ -106,9 +66,8 @@ void SymExpression::set(string mathematicalExpression)
 	}
 	// Substitutes constants' values in mathematical expression in infix form
 	infix = substituteConstantValues(infixList);
-	// Creates the postfix form of mathematical expression and substitutes 
-	// the parameters' values
-	postfix = subsituteParameterValues(SymFormConverter::InfixToPostfix(infix));
+	// Creates the postfix form of mathematical expression
+	postfix = SymFormConverter::InfixToPostfix(infix);
 }
 
 void SymExpression::setParameterValue(const string &name, double value)
@@ -150,12 +109,12 @@ string SymExpression::get()const
 	return initial;
 }
 
-list<string> SymExpression::getInfix()const
+list<string>& SymExpression::getInfix()
 {
 	return infix;
 }
 
-list<string> SymExpression::getPostfix()const
+list<string>& SymExpression::getPostfix()
 {
 	return postfix;
 }
