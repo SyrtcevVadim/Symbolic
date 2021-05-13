@@ -1,8 +1,23 @@
+/*
+Copyright 2021 Syrtcev Vadim Igorevich
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 #include"SymFormConverter.h"
 #include"symUtilities.h"
 #include"SymHelper.h"
 #include"SymConstantManager.h"
-#include<iostream>
 #include<string>
 #include<list>
 #include<stack>
@@ -10,7 +25,6 @@
 using std::string;
 using std::list;
 using std::stack;
-using std::cout;
 
 map<string, int> SymFormConverter::precedence{ {
     {"abs", 1},
@@ -50,27 +64,18 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
     // Stores previous token
     string previous{ "" };
 
-    string str = "";
-    for (string i : tokens)
-    {
-        str += i;
-    }
-
     // Iterates through the list of tokens
     for (string token : tokens)
     {
-        //cout << "token: " << token <<'\n';
         // Processing unary plus and unary minus operation
         if ((token == "+" || token == "-") && (previous.empty() || SymHelper::IsOpeningBracket(previous) || SymHelper::IsSeparator(previous) ||
             SymHelper::IsOperation(previous)))
         {
             token = "un" + token;
-            //cout << "is an unary: " << token << "\n";
             // Check the precedence of the function at the stack's top
             if (!stack.empty() && (SymHelper::IsFunction(stack.top()) || SymHelper::IsOperation(stack.top())) && (precedence[stack.top()] < precedence[token] ||
                 (precedence[stack.top()] == precedence[token] && token != "^"&&stack.top() != "^")))
             {
-                //cout << stack.top() << " was poped from the stack's top\n";
                 result.push_back(stack.top());
                 stack.pop();
             }
@@ -85,13 +90,11 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
         // Process opening brackets
         else if (SymHelper::IsOpeningBracket(token))
         {
-            //cout << "is an opening bracket\n";
             stack.push(token);
         }
         // Process closing parathesis
         else if (token == ")")
         {
-            //cout << "is a closing round bracket\n";
             // Pops everything from stack until we reach opening round bracket
             while (!stack.empty() && stack.top() != "(")
             {
@@ -106,7 +109,6 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
         }
         else if (token == "]")
         {
-            //cout << "is a closing square bracket\n";
             // Pops everything from stack until we reach opening square bracket
             while (!stack.empty() && stack.top() != "[")
             {
@@ -121,7 +123,6 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
         }
         else if (token == "}")
         {
-            //cout << "is a closing curly bracket\n";
             // Pops everything from stack until we reach opening curly bracket
             while (!stack.empty() && stack.top() != "{")
             {
@@ -136,7 +137,6 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
         }
         else if (SymHelper::IsSeparator(token))
         {
-            //cout << "is a separator\n";
             // Pops everything from the stack until we face with opening parenthesis
             while (!stack.empty() && !SymHelper::IsOpeningBracket(stack.top()))
             {
@@ -145,18 +145,16 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
             }
             if (stack.empty())
             {
-                throw "Opening bracket inside"+str+" is missed";
+                throw "Opening bracket is missed";
             }
         }
         else if (SymHelper::IsFunction(token) || SymHelper::IsOperation(token))
         {
-            //cout << "is an operation/function\n";
             // every function is pushed to the stack
             // Check the precedence of the function at the stack's top
             if (!stack.empty() && (SymHelper::IsFunction(stack.top()) || SymHelper::IsOperation(stack.top())) && (precedence[stack.top()] < precedence[token] ||
                 (precedence[stack.top()] == precedence[token] && token != "^")))
             {
-                //cout << stack.top() << " was poped from the stack's top\n";
                 result.push_back(stack.top());
                 stack.pop();
                 
@@ -171,12 +169,5 @@ list<string> SymFormConverter::InfixToPostfix(const list<string> &tokens)
         result.push_back(stack.top());
         stack.pop();
     }
-    //str = "";
-    //for (string i : result)
-    //{
-    //    str += i+" ";
-    //}
-    ////cout << "\t\tResult: " << str << '\n';
-
     return result;
 }

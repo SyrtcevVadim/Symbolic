@@ -13,8 +13,6 @@ TEST_CASE("Test of constructor function")
 	CHECK(test.get() == "x+1");
 	test = "5+e";
 	CHECK(test.get() == "5+e");
-
-	
 }
 
 TEST_CASE("Test of set() function")
