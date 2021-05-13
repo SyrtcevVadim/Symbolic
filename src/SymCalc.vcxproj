@@ -149,6 +149,7 @@
     <ClCompile Include="..\Tests\SymHelperTest.cpp" />
     <ClCompile Include="..\Tests\SymParserTest.cpp" />
     <ClCompile Include="..\Tests\symUtilitiesTest.cpp" />
+    <ClCompile Include="..\Tests\SymVerifierTest.cpp" />
     <ClCompile Include="SymCalculator.cpp" />
     <ClCompile Include="SymConstantManager.cpp" />
     <ClCompile Include="SymExpression.cpp" />

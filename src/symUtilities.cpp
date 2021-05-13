@@ -23,13 +23,8 @@ string numberToString(double number)
 	return result;
 }
 
-double stringToNumber(string &str)
+double stringToNumber(string str)
 {
-	// Checks the correctness of the number
-	//if (!SymHelper::IsNumber(str))
-	//{
-	//	throw "'" + str +"' isn't a correct decimal number!. In stringToNumber() function";
-	//}
 	stringstream ss{ str };
 	double result;
 	ss >> result;

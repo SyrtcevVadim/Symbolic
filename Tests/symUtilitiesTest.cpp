@@ -1,5 +1,5 @@
-#define SYM_USE_BENCHMARKING
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
+//#define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../src/symUtilities.h"
 #include<string>

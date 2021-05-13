@@ -173,13 +173,9 @@ double SymCalculator::compute(double variableValue)
 		else if (SymHelper::IsOperation(token) ||
 			SymHelper::IsFunction(token))
 		{
-			//cout << "Is an operation/function\n";
-
-
 			// Checks how many operands does this operation/function
-			// require
+			// requires
 			int operandQuantity = SymHelper::GetOperandQuantity(token);
-			//cout << "It requires " << operandQuantity << " operands!\n";
 
 			if (stack.size() < operandQuantity)
 			{

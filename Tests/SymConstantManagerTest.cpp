@@ -21,7 +21,7 @@ TEST_CASE("Test of IsConstant() function(negative case)")
 
 TEST_CASE("Test of HasConstants() function(positive case)")
 {
-	string expression = GENERATE("pi", "e", "x+pi-pi*pi", "1-e^x-pi");
+	string expression = GENERATE("pi", "e", "x+pi-pi*pi", "1-e^x-pi", "pi+e");
 	CHECK(SymConstantManager::HasConstants(SymParser::CreateTokenList(expression)));
 }
 

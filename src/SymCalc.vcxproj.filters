@@ -72,6 +72,9 @@
     <ClCompile Include="SymVerifier.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Tests\SymVerifierTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SymHelper.h">
