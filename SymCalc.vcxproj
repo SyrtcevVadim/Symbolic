@@ -141,36 +141,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Tests\main.cpp" />
-    <ClCompile Include="..\Tests\SymCalculatorTest.cpp" />
-    <ClCompile Include="..\Tests\SymConstantManagerTest.cpp" />
-    <ClCompile Include="..\Tests\SymExpressionTest.cpp" />
-    <ClCompile Include="..\Tests\SymFormConverterTest.cpp" />
-    <ClCompile Include="..\Tests\SymHelperTest.cpp" />
-    <ClCompile Include="..\Tests\SymParserTest.cpp" />
-    <ClCompile Include="..\Tests\symUtilitiesTest.cpp" />
-    <ClCompile Include="..\Tests\SymVerifierTest.cpp" />
-    <ClCompile Include="SymCalculator.cpp" />
-    <ClCompile Include="SymConstantManager.cpp" />
-    <ClCompile Include="SymExpression.cpp" />
-    <ClCompile Include="SymFormConverter.cpp" />
-    <ClCompile Include="SymHelper.cpp" />
-    <ClCompile Include="SymParser.cpp" />
-    <ClCompile Include="symUtilities.cpp" />
-    <ClCompile Include="SymVerifier.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="SymCalculator.h" />
-    <ClInclude Include="SymConstantManager.h" />
-    <ClInclude Include="SymExpression.h" />
-    <ClInclude Include="SymFormConverter.h" />
-    <ClInclude Include="SymHelper.h" />
-    <ClInclude Include="SymParser.h" />
-    <ClInclude Include="symUtilities.h" />
-    <ClInclude Include="SymVerifier.h" />
+    <ClCompile Include="src\SymCalculator.cpp" />
+    <ClCompile Include="src\SymConstantManager.cpp" />
+    <ClCompile Include="src\SymExpression.cpp" />
+    <ClCompile Include="src\SymFormConverter.cpp" />
+    <ClCompile Include="src\SymHelper.cpp" />
+    <ClCompile Include="src\SymParser.cpp" />
+    <ClCompile Include="src\symUtilities.cpp" />
+    <ClCompile Include="src\SymVerifier.cpp" />
+    <ClCompile Include="Tests\main.cpp" />
+    <ClCompile Include="Tests\SymCalculatorTest.cpp" />
+    <ClCompile Include="Tests\SymConstantManagerTest.cpp" />
+    <ClCompile Include="Tests\SymExpressionTest.cpp" />
+    <ClCompile Include="Tests\SymFormConverterTest.cpp" />
+    <ClCompile Include="Tests\SymHelperTest.cpp" />
+    <ClCompile Include="Tests\SymParserTest.cpp" />
+    <ClCompile Include="Tests\symUtilitiesTest.cpp" />
+    <ClCompile Include="Tests\SymVerifierTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\SymCalculator.h" />
+    <ClInclude Include="src\SymConstantManager.h" />
+    <ClInclude Include="src\SymExpression.h" />
+    <ClInclude Include="src\SymFormConverter.h" />
+    <ClInclude Include="src\SymHelper.h" />
+    <ClInclude Include="src\SymParser.h" />
+    <ClInclude Include="src\symUtilities.h" />
+    <ClInclude Include="src\SymVerifier.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

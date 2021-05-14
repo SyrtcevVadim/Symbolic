@@ -24,85 +24,85 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SymCalculator.cpp">
+    <ClCompile Include="Tests\main.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymCalculatorTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymConstantManagerTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymExpressionTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymFormConverterTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymHelperTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymParserTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\symUtilitiesTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SymVerifierTest.cpp">
+      <Filter>Исходные файлы\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SymCalculator.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="SymConstantManager.cpp">
+    <ClCompile Include="src\SymConstantManager.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="SymExpression.cpp">
+    <ClCompile Include="src\SymExpression.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="SymFormConverter.cpp">
+    <ClCompile Include="src\SymFormConverter.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="SymHelper.cpp">
+    <ClCompile Include="src\SymHelper.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="SymParser.cpp">
+    <ClCompile Include="src\SymParser.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="symUtilities.cpp">
+    <ClCompile Include="src\symUtilities.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Tests\SymCalculatorTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Tests\SymConstantManagerTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Tests\SymExpressionTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Tests\SymFormConverterTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Tests\SymHelperTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Tests\SymParserTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Tests\symUtilitiesTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Tests\main.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="SymVerifier.cpp">
+    <ClCompile Include="src\SymVerifier.cpp">
       <Filter>Исходные файлы\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Tests\SymVerifierTest.cpp">
-      <Filter>Исходные файлы\Tests</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="SymHelper.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
-    <ClInclude Include="SymCalculator.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
-    <ClInclude Include="SymConstantManager.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
-    <ClInclude Include="SymExpression.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
-    <ClInclude Include="SymFormConverter.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
-    <ClInclude Include="SymParser.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
-    <ClInclude Include="symUtilities.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
-    <ClInclude Include="SymVerifier.h">
-      <Filter>Файлы заголовков\src</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\SymVerifier.h">
+      <Filter>Исходные файлы\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\symUtilities.h">
+      <Filter>Файлы заголовков\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SymParser.h">
+      <Filter>Файлы заголовков\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SymHelper.h">
+      <Filter>Файлы заголовков\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SymFormConverter.h">
+      <Filter>Файлы заголовков\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SymExpression.h">
+      <Filter>Файлы заголовков\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SymConstantManager.h">
+      <Filter>Файлы заголовков\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SymCalculator.h">
+      <Filter>Файлы заголовков\src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
