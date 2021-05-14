@@ -1,4 +1,4 @@
-# What is the SymCalc?
+# What is the Symbolic?
 ___
 Symbolic(Symbolic Caclulations) is a framework for symbolic computations for C++. It supports a wide spread of the common mathematical functions, correctness-check of mathematical expressions, computations of values of mathematical expressions
 
