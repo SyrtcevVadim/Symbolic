@@ -20,6 +20,7 @@ limitations under the License.
 #include"SymFormConverter.h"
 #include"SymConstantManager.h"
 #include"symUtilities.h"
+#include<iostream>
 #include<string>
 #include<list>
 #include<map>
@@ -129,4 +130,17 @@ list<string>& SymExpression::getInfix()
 list<string>& SymExpression::getPostfix()
 {
 	return postfix;
+}
+
+std::ostream& operator<<(std::ostream& out, const SymExpression& expression)
+{
+	return (out << expression.initial);
+}
+
+std::istream& operator>>(std::istream& in, SymExpression& expression)
+{
+	string strIn;
+	in >> strIn;
+	expression.set(strIn);
+	return in;
 }

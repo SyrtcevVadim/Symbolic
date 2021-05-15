@@ -15,6 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include<string>
+#include<iostream>
 #include<list>
 #include<map>
 
@@ -96,4 +97,7 @@ public:
     /// Returns the list of tokens of mathematical expression in postfix form
     /// </summary>
     list<string>& getPostfix();
+
+    friend std::ostream& operator<<(std::ostream& out, const SymExpression& expression);
+    friend std::istream& operator>>(std::istream& in, SymExpression& expression);
 };
