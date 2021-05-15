@@ -27,6 +27,8 @@ limitations under the License.
 #include<cmath>
 
 using std::list;
+using std::ostream;
+using std::istream;
 using std::to_string;
 using std::string;
 
@@ -48,6 +50,12 @@ SymExpression::SymExpression(const char* mathematicalExpression)
 {
 	setParameterValues();
 	set(mathematicalExpression);
+}
+
+SymExpression::SymExpression(double number)
+{
+	setParameterValues();
+	set(numberToString(number));
 }
 
 string SymExpression::substituteConstantValues(string initial)
@@ -140,42 +148,84 @@ list<string>& SymExpression::getPostfix()
 }
 
 
-SymExpression SymExpression::operator+(const SymExpression& rVal)
+// Overloaded operations for SymExpression objects
+
+SymExpression operator+(const SymExpression& lVal, const SymExpression& rVal)
 {
-	string result = initial + "+" + rVal.initial;
+	string result = lVal.initial + "+" + rVal.initial;
 	return SymExpression(result);
 }
 
-SymExpression SymExpression::operator-(const SymExpression& rVal)
+SymExpression operator-(const SymExpression& lVal,const SymExpression& rVal)
 {
-	string result = "(" + initial + ")" + "-" + "(" + rVal.initial + ")";
+	string result = "(" + lVal.initial + ")" + "-" + "(" + rVal.initial + ")";
 	return SymExpression(result);
 }
 
-SymExpression SymExpression::operator*(const SymExpression& rVal)
+SymExpression operator*(const SymExpression& lVal, const SymExpression& rVal)
 {
-	string result = "(" + initial + ")" + "*" + "(" + rVal.initial + ")";
+	string result = "(" + lVal.initial + ")" + "*" + "(" + rVal.initial + ")";
 	return SymExpression(result);
 }
 
-SymExpression SymExpression::operator/(const SymExpression& rVal)
+SymExpression operator/(const SymExpression& lVal, const SymExpression& rVal)
 {
-	string result = "(" + initial + ")" + "/" + "(" + rVal.initial + ")";
+	string result = "(" + lVal.initial + ")" + "/" + "(" + rVal.initial + ")";
 	return SymExpression(result);
 }
 
-SymExpression SymExpression::operator^(const SymExpression& rVal)
+SymExpression operator^(const SymExpression& lVal, const SymExpression& rVal)
 {
-	string result = "(" + initial + ")" + "^" + "(" + rVal.initial + ")";
+	string result = "(" + lVal.initial + ")" + "^" + "(" + rVal.initial + ")";
 	return result;
 }
 
-std::ostream& operator<<(std::ostream& out, const SymExpression& expression)
+SymExpression& SymExpression::operator+=(const SymExpression& rVal)
+{
+	set(initial+"+"+rVal.initial);
+	return *this;
+}
+
+SymExpression& SymExpression::operator-=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "-" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+SymExpression& SymExpression::operator*=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "*" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+SymExpression& SymExpression::operator/=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "/" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+SymExpression& SymExpression::operator^=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "^" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+bool operator==(const SymExpression& lVal, const SymExpression& rVal)
+{
+	// Compares the initial expressions
+	if (lVal.initial == rVal.initial)
+	{
+		return true;
+	}
+	return false;
+}
+
+ostream& operator<<(std::ostream& out, const SymExpression& expression)
 {
 	return (out << expression.initial);
 }
 
-std::istream& operator>>(std::istream& in, SymExpression& expression)
+istream& operator>>(std::istream& in, SymExpression& expression)
 {
 	string strIn;
 	in >> strIn;

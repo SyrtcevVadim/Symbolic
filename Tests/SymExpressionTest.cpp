@@ -77,12 +77,22 @@ TEST_CASE("Using of constants inside SymExpression")
 	CHECK(calculator.compute() == Approx(6.0));
 	SymConstantManager::AddConstant("g", "r+z");
 	expression = "g\n\t";
-	CHECK(expression.get() == "g");
+	CHECK(expression == "g");
 	CHECK(expression.getReal() == "1+2+1+2+3");
 	CHECK(calculator.compute() == Approx(9.0));
 
 	SymConstantManager::RemoveConstant("r");
 	SymConstantManager::RemoveConstant("z");
+}
+
+TEST_CASE("Test of '==' operation")
+{
+	SymExpression a{ "1+2+3-x" };
+	SymExpression b{ "1+2+3-x" };
+
+	CHECK(a == b);
+	CHECK(a == "1+2+3-x");
+	CHECK_FALSE(a == "x-1");
 }
 
 TEST_CASE("Test of '+' operation")
@@ -92,8 +102,15 @@ TEST_CASE("Test of '+' operation")
 
 	SymExpression c = a + b;
 
-	CHECK(c.get() == "x+1-e+2*pi");
+	CHECK(c == "x+1-e+2*pi");
 
+	a = a + "x";
+	CHECK(a == "x+1-e+x");
+	a = a + 7;
+	CHECK(a == "x+1-e+x+7");
+	a = 1;
+	a = 7 + a;
+	CHECK(a == "7+1");
 }
 
 TEST_CASE("Test of '-' operation")
@@ -102,8 +119,15 @@ TEST_CASE("Test of '-' operation")
 	SymExpression a{ "7*x-4*z" };
 	SymExpression b{ "8*x-z" };
 	SymExpression c = a - b;
-	CHECK(c.get() == "(7*x-4*z)-(8*x-z)");
+	CHECK(c == "(7*x-4*z)-(8*x-z)");
 	SymConstantManager::RemoveConstant("z");
+
+	a = a - 11;
+	CHECK(a == "(7*x-4*z)-(11)");
+	a = "x";
+	a = a + "x+1";
+	CHECK(a == "x+x+1");
+	
 }
 
 TEST_CASE("Test of '*' operation")
@@ -112,7 +136,7 @@ TEST_CASE("Test of '*' operation")
 	SymExpression b{"a-b"};
 
 	SymExpression c{ a * b };
-	CHECK(c.get() == "(x+1-3)*(a-b)");
+	CHECK(c == "(x+1-3)*(a-b)");
 }
 
 TEST_CASE("Test of '/' operation")
@@ -121,7 +145,7 @@ TEST_CASE("Test of '/' operation")
 	SymExpression b{ "7\n" };
 
 	SymExpression c = a / b;
-	CHECK(c.get() == "(x)/(7)");
+	CHECK(c == "(x)/(7)");
 }
 
 TEST_CASE("Test of '^' operation")
@@ -130,7 +154,56 @@ TEST_CASE("Test of '^' operation")
 	SymExpression b{ "x+1" };
 
 	SymExpression c{ a ^ b };
-	CHECK(c.get() == "(789)^(x+1)");
+	CHECK(c == "(789)^(x+1)");
+}
+
+TEST_CASE("Test of '+=' operation")
+{
+	SymExpression a{ "x+1" };
+	SymExpression b{ "2" };
+	a += b;
+	CHECK(a == "x+1+2");
+	a += "7-x";
+	CHECK(a == "x+1+2+7-x");
+}
+
+TEST_CASE("Test of '-=' operation")
+{
+	SymExpression a{ "a+10-e" };
+	SymExpression b{ "b-754" };
+	a -= b;
+	CHECK(a == "(a+10-e)-(b-754)");
+	a -= "-123";
+	CHECK(a == "((a+10-e)-(b-754))-(-123)");
+}
+
+TEST_CASE("Test of '*=' operation")
+{
+	SymExpression a{ "x-1" };
+	SymExpression b{ "a+c" };
+
+	a *= b;
+	CHECK(a == "(x-1)*(a+c)");
+
+}
+
+TEST_CASE("Test of '/=' operation")
+{
+	SymExpression a{ "log(5,25)" };
+	SymExpression b = "7*x";
+	a /= b;
+	CHECK(a == "(log(5,25))/(7*x)");
+}
+
+TEST_CASE("Test of '^=' operation")
+{
+	SymExpression a{ "x" };
+	SymExpression b{ "x" };
+	a ^= b;
+	CHECK(a == "(x)^(x)");
+	a = "7";
+	a ^= "3";
+	CHECK(a == "(7)^(3)");
 }
 
 
@@ -143,7 +216,6 @@ TEST_CASE("Test of insertion/extraction operations(<</>>)")
 	ss >> b;
 	CHECK(b.get() == a.get());
 }
-
 // Benchmarking
 #ifdef SYM_USE_BENCHMARKING
 TEST_CASE("SymExpression class")

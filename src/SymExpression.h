@@ -61,6 +61,7 @@ public:
     SymExpression();
     SymExpression(const char* mathematicalExpression);  
     SymExpression(string mathematicalExpression);
+    SymExpression(double number);
 
     /// <summary>
     /// Sets the value of the mathematical expression
@@ -93,6 +94,10 @@ public:
     /// </summary>
     string get()const;
 
+    /// <summary>
+    /// Returns the user-provided mathematical expression with substituted constants' values
+    /// </summary>
+    /// <returns></returns>
     string getReal()const;
 
     /// <summary>
@@ -105,11 +110,25 @@ public:
     /// </summary>
     list<string>& getPostfix();
 
-    SymExpression operator+(const SymExpression& rVal);
-    SymExpression operator-(const SymExpression& rVal);
-    SymExpression operator*(const SymExpression& rVal);
-    SymExpression operator/(const SymExpression& rVal);
-    SymExpression operator^(const SymExpression& rVal);
+    // Concatenates SymExpressions objects with substituting of the apropriate operation between them
+
+    friend SymExpression operator+(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator-(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator*(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator/(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator^(const SymExpression& lVal, const SymExpression& rVal);
+
+    // Appends the rVal expression to the lVal with substituting of the appropriate operation between these parts 
+
+    SymExpression& operator+=(const SymExpression& rVal);
+    SymExpression& operator-=(const SymExpression& rVal);
+    SymExpression& operator*=(const SymExpression& rVal);
+    SymExpression& operator/=(const SymExpression& rVal);
+    SymExpression& operator^=(const SymExpression& rVal);
+
+    // Compares two SymExpression objects
+
+    friend bool operator==(const SymExpression &lVal, const SymExpression& rVal);
 
     friend std::ostream& operator<<(std::ostream& out, const SymExpression& expression);
     friend std::istream& operator>>(std::istream& in, SymExpression& expression);
