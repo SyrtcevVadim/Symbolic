@@ -76,10 +76,12 @@ string SymExpression::substituteConstantValues(string initial)
 
 void SymExpression::set(string mathematicalExpression)
 {
-	initial = substituteConstantValues(mathematicalExpression);
-	// Substitutes constants' values in mathematical expression in infix form
-	infix = SymParser::CreateTokenList(initial);
-	// Creates the postfix form of mathematical expression
+	// Brings a user-provided mathematical expression to the standart view
+	initial = removeSpaces(mathematicalExpression);
+	// Substitutes constants' values into the mathematical expression
+	real = substituteConstantValues(initial);
+	infix = SymParser::CreateTokenList(real);
+	// Creates the postfix form
 	postfix = SymFormConverter::InfixToPostfix(infix);
 }
 
@@ -122,6 +124,11 @@ string SymExpression::get()const
 	return initial;
 }
 
+string SymExpression::getReal()const
+{
+	return real;
+}
+
 list<string>& SymExpression::getInfix()
 {
 	return infix;
@@ -130,6 +137,37 @@ list<string>& SymExpression::getInfix()
 list<string>& SymExpression::getPostfix()
 {
 	return postfix;
+}
+
+
+SymExpression SymExpression::operator+(const SymExpression& rVal)
+{
+	string result = initial + "+" + rVal.initial;
+	return SymExpression(result);
+}
+
+SymExpression SymExpression::operator-(const SymExpression& rVal)
+{
+	string result = "(" + initial + ")" + "-" + "(" + rVal.initial + ")";
+	return SymExpression(result);
+}
+
+SymExpression SymExpression::operator*(const SymExpression& rVal)
+{
+	string result = "(" + initial + ")" + "*" + "(" + rVal.initial + ")";
+	return SymExpression(result);
+}
+
+SymExpression SymExpression::operator/(const SymExpression& rVal)
+{
+	string result = "(" + initial + ")" + "/" + "(" + rVal.initial + ")";
+	return SymExpression(result);
+}
+
+SymExpression SymExpression::operator^(const SymExpression& rVal)
+{
+	string result = "(" + initial + ")" + "^" + "(" + rVal.initial + ")";
+	return result;
 }
 
 std::ostream& operator<<(std::ostream& out, const SymExpression& expression)

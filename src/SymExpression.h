@@ -32,6 +32,11 @@ private:
     string initial;
 
     /// <summary>
+    /// User-provided mathematical expression with substituted constant's values
+    /// </summary>
+    string real;
+
+    /// <summary>
     /// List of tokens of a mathematical expression written in infix form. Every constant inside it is replaced by it's value
     /// </summary>
     list<string> infix;
@@ -88,6 +93,8 @@ public:
     /// </summary>
     string get()const;
 
+    string getReal()const;
+
     /// <summary>
     /// Returns the list of tokens of mathematical expression in infix form
     /// </summary>
@@ -97,6 +104,12 @@ public:
     /// Returns the list of tokens of mathematical expression in postfix form
     /// </summary>
     list<string>& getPostfix();
+
+    SymExpression operator+(const SymExpression& rVal);
+    SymExpression operator-(const SymExpression& rVal);
+    SymExpression operator*(const SymExpression& rVal);
+    SymExpression operator/(const SymExpression& rVal);
+    SymExpression operator^(const SymExpression& rVal);
 
     friend std::ostream& operator<<(std::ostream& out, const SymExpression& expression);
     friend std::istream& operator>>(std::istream& in, SymExpression& expression);

@@ -29,6 +29,19 @@ string trim(string str)
 	return str;
 }
 
+string removeSpaces(string str)
+{
+	stringstream ss{ str };
+	string result{ "" };
+	while (!ss.eof())
+	{
+		string current;
+		ss >> current;
+		result += current;
+	}
+	return result;
+}
+
 string numberToString(double number)
 {
 	stringstream ss;
