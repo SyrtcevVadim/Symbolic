@@ -2,6 +2,8 @@
 //#define SYM_USE_BENCHMARKING
 #include"Catch2TestFramework/catch.hpp"
 #include"../src/SymExpression.h"
+#include"../src/SymConstantManager.h"
+#include"../src/SymCalculator.h"
 #include<string>
 
 using std::string;
@@ -12,7 +14,7 @@ TEST_CASE("Test of constructor function")
 	SymExpression test{"x+1"};
 	CHECK(test.get() == "x+1");
 	test = "5+e";
-	CHECK(test.get() == "5+e");
+	CHECK(test.get() == "5+2.718281828");
 }
 
 TEST_CASE("Test of set() function")
@@ -58,6 +60,21 @@ TEST_CASE("Test of getPostfix() function")
 {
 	SymExpression test{ "x+a" };
 	CHECK(test.getPostfix() == list<string>{"x", "a", "+"});
+}
+
+TEST_CASE("Using of constants inside SymExpression")
+{
+	SymConstantManager::AddConstant("r", "1+2");
+	SymConstantManager::AddConstant("z", "r+3");
+	
+	SymExpression expression("z");
+	CHECK(expression.get() == "1+2+3");
+	SymCalculator calculator(expression);
+	CHECK(calculator.compute() == Approx(6.0));
+	SymConstantManager::AddConstant("g", "r+z");
+	expression = "g";
+	CHECK(expression.get() == "1+2+1+2+3");
+	CHECK(calculator.compute() == Approx(9.0));
 }
 
 // Benchmarking

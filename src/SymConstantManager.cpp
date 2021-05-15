@@ -40,9 +40,9 @@ bool SymConstantManager::IsConstant(const string& str)
 	return false;
 }
 
-bool SymConstantManager::HasConstants(const list<string>& infix)
+bool SymConstantManager::HasConstants(string infix)
 {
-	for (string token : infix)
+	for (string& token : SymParser::CreateTokenList(infix))
 	{
 		if (IsConstant(token))
 		{

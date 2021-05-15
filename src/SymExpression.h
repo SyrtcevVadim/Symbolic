@@ -47,9 +47,9 @@ private:
     /// <summary>
     /// Substitutes constants' values in mathematical expression in infix form
     /// </summary>
-    /// <param name="infix">List of tokens of mathematical expression in infix form</param>
-    /// <returns>List of tokens of mathematical expression in infix form with substituted constants' values</returns>
-    list<string> substituteConstantValues(const list<string> &infix);
+    /// <param name="Initial">Mathematical expression in infix form</param>
+    /// <returns>Mathematical expression in infix form with substituted constants' values</returns>
+    string substituteConstantValues(string initial);
 
 public:
     SymExpression();

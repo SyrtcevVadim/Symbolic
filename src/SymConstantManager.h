@@ -38,7 +38,7 @@ public:
 	/// in infix form contains constants
 	/// </summary>
 	/// <param name="infix">List of tokens of mathematical expression in infix form</param>
-	static bool HasConstants(const list<string>& infix);
+	static bool HasConstants(string infix);
 	/// <summary>
 	/// Adds new constant with provided value. If constant with the same
 	/// name have been already created it does nothing

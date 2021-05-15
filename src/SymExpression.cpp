@@ -49,39 +49,35 @@ SymExpression::SymExpression(const char* mathematicalExpression)
 	set(mathematicalExpression);
 }
 
-list<string> SymExpression::substituteConstantValues(const list<string> &infix)
+string SymExpression::substituteConstantValues(string initial)
 {
-	list<string> temp = infix;
-	while(SymConstantManager::HasConstants(temp))
+	string res{ "" };
+	for (string& token : SymParser::CreateTokenList(initial))
 	{
-		list<string> result;
-		for (string token : temp)
+		if (SymConstantManager::IsConstant(token))
 		{
-			if (SymConstantManager::IsConstant(token))
-			{
-				result.push_back(SymConstantManager::GetConstantValue(token));
-			}
-			else
-			{
-				result.push_back(token);
-			}
+			res += SymConstantManager::GetConstantValue(token);
 		}
-		temp = result;
+		else
+		{
+			res += token;
+		}
 	}
-	return temp;
+	if (SymConstantManager::HasConstants(res))
+	{
+		return substituteConstantValues(res);
+	}
+	else
+	{
+		return res;
+	}
 }
 
 void SymExpression::set(string mathematicalExpression)
 {
-	list<string> infixList = SymParser::CreateTokenList(mathematicalExpression);
-	initial = "";
-	// Brings the initial expression to the standart view(expression without any spaces)
-	for (string token : infixList)
-	{
-		initial += token;
-	}
+	initial = substituteConstantValues(mathematicalExpression);
 	// Substitutes constants' values in mathematical expression in infix form
-	infix = substituteConstantValues(infixList);
+	infix = SymParser::CreateTokenList(initial);
 	// Creates the postfix form of mathematical expression
 	postfix = SymFormConverter::InfixToPostfix(infix);
 }
