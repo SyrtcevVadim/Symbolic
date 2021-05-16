@@ -15,6 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include"SymHelper.h"
+#include"SymExpression.h"
 #include<string>
 #include<list>
 
@@ -54,6 +55,7 @@ private:
 
 public:
     SymVerifier(const string& expression);
+    SymVerifier(const SymExpression& expression);
 
     // Check-methods
 

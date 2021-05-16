@@ -10,8 +10,8 @@ using std::string;
 
 TEST_CASE("Test of IsConstant() function(positive case)")
 {
-	string testConstant = GENERATE("e", "pi");
-	CHECK(SymConstantManager::IsConstant(testConstant));
+	CHECK(SymConstantManager::IsConstant("e"));
+	CHECK(SymConstantManager::IsConstant("pi"));
 }
 TEST_CASE("Test of IsConstant() function(negative case)")
 {
@@ -22,13 +22,13 @@ TEST_CASE("Test of IsConstant() function(negative case)")
 TEST_CASE("Test of HasConstants() function(positive case)")
 {
 	string expression = GENERATE("pi", "e", "x+pi-pi*pi", "1-e^x-pi", "pi+e");
-	CHECK(SymConstantManager::HasConstants(SymParser::CreateTokenList(expression)));
+	CHECK(SymConstantManager::HasConstants(expression));
 }
 
 TEST_CASE("Test of HasConstants() function(negative case)")
 {
 	string expression = GENERATE("", "x", "1+2+3");
-	CHECK_FALSE(SymConstantManager::HasConstants(SymParser::CreateTokenList(expression)));
+	CHECK_FALSE(SymConstantManager::HasConstants(expression));
 }
 
 TEST_CASE("Test of AddConstant() function")

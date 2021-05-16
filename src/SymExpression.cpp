@@ -20,12 +20,15 @@ limitations under the License.
 #include"SymFormConverter.h"
 #include"SymConstantManager.h"
 #include"symUtilities.h"
+#include<iostream>
 #include<string>
 #include<list>
 #include<map>
 #include<cmath>
 
 using std::list;
+using std::ostream;
+using std::istream;
 using std::to_string;
 using std::string;
 
@@ -49,40 +52,44 @@ SymExpression::SymExpression(const char* mathematicalExpression)
 	set(mathematicalExpression);
 }
 
-list<string> SymExpression::substituteConstantValues(const list<string> &infix)
+SymExpression::SymExpression(double number)
 {
-	list<string> temp = infix;
-	while(SymConstantManager::HasConstants(temp))
+	setParameterValues();
+	set(numberToString(number));
+}
+
+string SymExpression::substituteConstantValues(string initial)
+{
+	string res{ "" };
+	for (string& token : SymParser::CreateTokenList(initial))
 	{
-		list<string> result;
-		for (string token : temp)
+		if (SymConstantManager::IsConstant(token))
 		{
-			if (SymConstantManager::IsConstant(token))
-			{
-				result.push_back(SymConstantManager::GetConstantValue(token));
-			}
-			else
-			{
-				result.push_back(token);
-			}
+			res += SymConstantManager::GetConstantValue(token);
 		}
-		temp = result;
+		else
+		{
+			res += token;
+		}
 	}
-	return temp;
+	if (SymConstantManager::HasConstants(res))
+	{
+		return substituteConstantValues(res);
+	}
+	else
+	{
+		return res;
+	}
 }
 
 void SymExpression::set(string mathematicalExpression)
 {
-	list<string> infixList = SymParser::CreateTokenList(mathematicalExpression);
-	initial = "";
-	// Brings the initial expression to the standart view(expression without any spaces)
-	for (string token : infixList)
-	{
-		initial += token;
-	}
-	// Substitutes constants' values in mathematical expression in infix form
-	infix = substituteConstantValues(infixList);
-	// Creates the postfix form of mathematical expression
+	// Brings a user-provided mathematical expression to the standart view
+	initial = removeSpaces(mathematicalExpression);
+	// Substitutes constants' values into the mathematical expression
+	real = substituteConstantValues(initial);
+	infix = SymParser::CreateTokenList(real);
+	// Creates the postfix form
 	postfix = SymFormConverter::InfixToPostfix(infix);
 }
 
@@ -125,6 +132,11 @@ string SymExpression::get()const
 	return initial;
 }
 
+string SymExpression::getReal()const
+{
+	return real;
+}
+
 list<string>& SymExpression::getInfix()
 {
 	return infix;
@@ -133,4 +145,90 @@ list<string>& SymExpression::getInfix()
 list<string>& SymExpression::getPostfix()
 {
 	return postfix;
+}
+
+
+// Overloaded operations for SymExpression objects
+
+SymExpression operator+(const SymExpression& lVal, const SymExpression& rVal)
+{
+	string result = lVal.initial + "+" + rVal.initial;
+	return SymExpression(result);
+}
+
+SymExpression operator-(const SymExpression& lVal,const SymExpression& rVal)
+{
+	string result = "(" + lVal.initial + ")" + "-" + "(" + rVal.initial + ")";
+	return SymExpression(result);
+}
+
+SymExpression operator*(const SymExpression& lVal, const SymExpression& rVal)
+{
+	string result = "(" + lVal.initial + ")" + "*" + "(" + rVal.initial + ")";
+	return SymExpression(result);
+}
+
+SymExpression operator/(const SymExpression& lVal, const SymExpression& rVal)
+{
+	string result = "(" + lVal.initial + ")" + "/" + "(" + rVal.initial + ")";
+	return SymExpression(result);
+}
+
+SymExpression operator^(const SymExpression& lVal, const SymExpression& rVal)
+{
+	string result = "(" + lVal.initial + ")" + "^" + "(" + rVal.initial + ")";
+	return result;
+}
+
+SymExpression& SymExpression::operator+=(const SymExpression& rVal)
+{
+	set(initial+"+"+rVal.initial);
+	return *this;
+}
+
+SymExpression& SymExpression::operator-=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "-" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+SymExpression& SymExpression::operator*=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "*" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+SymExpression& SymExpression::operator/=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "/" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+SymExpression& SymExpression::operator^=(const SymExpression& rVal)
+{
+	set("(" + this->initial + ")" + "^" + "(" + rVal.initial + ")");
+	return *this;
+}
+
+bool operator==(const SymExpression& lVal, const SymExpression& rVal)
+{
+	// Compares the initial expressions
+	if (lVal.initial == rVal.initial)
+	{
+		return true;
+	}
+	return false;
+}
+
+ostream& operator<<(std::ostream& out, const SymExpression& expression)
+{
+	return (out << expression.initial);
+}
+
+istream& operator>>(std::istream& in, SymExpression& expression)
+{
+	string strIn;
+	in >> strIn;
+	expression.set(strIn);
+	return in;
 }

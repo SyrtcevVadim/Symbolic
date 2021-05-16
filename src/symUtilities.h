@@ -20,6 +20,9 @@ using std::string;
 /// Deletes begining and trailing spaces from a provided string
 string trim(string str);
 
+/// Deletes all spaces from the provided string
+string removeSpaces(string str);
+
 /// Converts the number into string represetation
 string numberToString(double number);
 

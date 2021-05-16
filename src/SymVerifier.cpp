@@ -31,6 +31,12 @@ SymVerifier::SymVerifier(const string& expression)
 	clearError();
 }
 
+SymVerifier::SymVerifier(const SymExpression& expression)
+{
+	tokens = expression.infix;
+	clearError();
+}
+
 void SymVerifier::clearError()
 {
 	errorMessage.clear();

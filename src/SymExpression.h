@@ -15,6 +15,7 @@ limitations under the License.
 */
 #pragma once
 #include<string>
+#include<iostream>
 #include<list>
 #include<map>
 
@@ -29,6 +30,11 @@ private:
     /// Initial user-provided mathematical expression
     /// </summary>
     string initial;
+
+    /// <summary>
+    /// User-provided mathematical expression with substituted constant's values
+    /// </summary>
+    string real;
 
     /// <summary>
     /// List of tokens of a mathematical expression written in infix form. Every constant inside it is replaced by it's value
@@ -47,14 +53,25 @@ private:
     /// <summary>
     /// Substitutes constants' values in mathematical expression in infix form
     /// </summary>
-    /// <param name="infix">List of tokens of mathematical expression in infix form</param>
-    /// <returns>List of tokens of mathematical expression in infix form with substituted constants' values</returns>
-    list<string> substituteConstantValues(const list<string> &infix);
+    /// <param name="Initial">Mathematical expression in infix form</param>
+    /// <returns>Mathematical expression in infix form with substituted constants' values</returns>
+    string substituteConstantValues(string initial);
+
+    /// <summary>
+    /// Returns the list of tokens of mathematical expression in infix form
+    /// </summary>
+    list<string>& getInfix();
+
+    /// <summary>
+    /// Returns the list of tokens of mathematical expression in postfix form
+    /// </summary>
+    list<string>& getPostfix();
 
 public:
     SymExpression();
     SymExpression(const char* mathematicalExpression);  
     SymExpression(string mathematicalExpression);
+    SymExpression(double number);
 
     /// <summary>
     /// Sets the value of the mathematical expression
@@ -88,12 +105,38 @@ public:
     string get()const;
 
     /// <summary>
-    /// Returns the list of tokens of mathematical expression in infix form
+    /// Returns the user-provided mathematical expression with substituted constants' values
     /// </summary>
-    list<string>& getInfix();
+    /// <returns></returns>
+    string getReal()const;
 
-    /// <summary>
-    /// Returns the list of tokens of mathematical expression in postfix form
-    /// </summary>
-    list<string>& getPostfix();
+    
+
+    // Concatenates SymExpressions objects with substituting of the apropriate operation between them
+
+    friend SymExpression operator+(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator-(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator*(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator/(const SymExpression& lVal, const SymExpression& rVal);
+    friend SymExpression operator^(const SymExpression& lVal, const SymExpression& rVal);
+
+    // Compares two SymExpression objects
+
+    friend bool operator==(const SymExpression& lVal, const SymExpression& rVal);
+
+    // Appends the rVal expression to the lVal with substituting of the appropriate operation between these parts 
+
+    SymExpression& operator+=(const SymExpression& rVal);
+    SymExpression& operator-=(const SymExpression& rVal);
+    SymExpression& operator*=(const SymExpression& rVal);
+    SymExpression& operator/=(const SymExpression& rVal);
+    SymExpression& operator^=(const SymExpression& rVal);
+
+    // Overloads working of input/output streams with SymExpression objects
+
+    friend std::ostream& operator<<(std::ostream& out, const SymExpression& expression);
+    friend std::istream& operator>>(std::istream& in, SymExpression& expression);
+
+    friend class SymCalculator;
+    friend class SymVerifier;
 };

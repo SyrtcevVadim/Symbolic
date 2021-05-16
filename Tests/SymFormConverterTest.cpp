@@ -29,7 +29,7 @@ TEST_CASE("Test of InfixToPostfix() function")
 								{"x", "sin"}, {"x","cos"}, {"x","tg"}, {"x","ctg"},
 								{"x","1","pi","+","sin","*","sin"}};
 
-	for (int i{ 0 }; i < input.size(); i++)
+	for (size_t i{ 0 }; i < input.size(); i++)
 	{
 		INFO(input[i]);
 		CHECK(SymFormConverter::InfixToPostfix(SymParser::CreateTokenList(input[i])) == output[i]);
