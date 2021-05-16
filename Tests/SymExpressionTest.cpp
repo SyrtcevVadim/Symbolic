@@ -51,20 +51,6 @@ TEST_CASE("Test of setParameterValues() function")
 	CHECK(test.getParameterValue("d") == 5.0);
 }
 
-TEST_CASE("Test of getInfix() function")
-{
-	SymExpression test("x+1");
-	CHECK(test.getInfix() == list<string>{"x", "+", "1"});
-	test = "e+1";
-	CHECK(test.getInfix() == list<string>{"2.718281828", "+", "1"});
-}
-
-TEST_CASE("Test etPostfix() function")
-{
-	SymExpression test{ "x+a" };
-	CHECK(test.getPostfix() == list<string>{"x", "a", "+"});
-}
-
 TEST_CASE("Using of constants inside SymExpression")
 {
 	SymConstantManager::AddConstant("r", "1+2");

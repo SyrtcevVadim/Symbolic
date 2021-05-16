@@ -57,6 +57,16 @@ private:
     /// <returns>Mathematical expression in infix form with substituted constants' values</returns>
     string substituteConstantValues(string initial);
 
+    /// <summary>
+    /// Returns the list of tokens of mathematical expression in infix form
+    /// </summary>
+    list<string>& getInfix();
+
+    /// <summary>
+    /// Returns the list of tokens of mathematical expression in postfix form
+    /// </summary>
+    list<string>& getPostfix();
+
 public:
     SymExpression();
     SymExpression(const char* mathematicalExpression);  
@@ -100,15 +110,7 @@ public:
     /// <returns></returns>
     string getReal()const;
 
-    /// <summary>
-    /// Returns the list of tokens of mathematical expression in infix form
-    /// </summary>
-    list<string>& getInfix();
-
-    /// <summary>
-    /// Returns the list of tokens of mathematical expression in postfix form
-    /// </summary>
-    list<string>& getPostfix();
+    
 
     // Concatenates SymExpressions objects with substituting of the apropriate operation between them
 
@@ -118,6 +120,10 @@ public:
     friend SymExpression operator/(const SymExpression& lVal, const SymExpression& rVal);
     friend SymExpression operator^(const SymExpression& lVal, const SymExpression& rVal);
 
+    // Compares two SymExpression objects
+
+    friend bool operator==(const SymExpression& lVal, const SymExpression& rVal);
+
     // Appends the rVal expression to the lVal with substituting of the appropriate operation between these parts 
 
     SymExpression& operator+=(const SymExpression& rVal);
@@ -126,10 +132,11 @@ public:
     SymExpression& operator/=(const SymExpression& rVal);
     SymExpression& operator^=(const SymExpression& rVal);
 
-    // Compares two SymExpression objects
-
-    friend bool operator==(const SymExpression &lVal, const SymExpression& rVal);
+    // Overloads working of input/output streams with SymExpression objects
 
     friend std::ostream& operator<<(std::ostream& out, const SymExpression& expression);
     friend std::istream& operator>>(std::istream& in, SymExpression& expression);
+
+    friend class SymCalculator;
+    friend class SymVerifier;
 };

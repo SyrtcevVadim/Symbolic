@@ -37,7 +37,7 @@ public:
 	/// Checks whether provided list of tokens of mathematical expression
 	/// in infix form contains constants
 	/// </summary>
-	/// <param name="infix">List of tokens of mathematical expression in infix form</param>
+	/// <param name="infix">Mathematical expression in infix form</param>
 	static bool HasConstants(string infix);
 	/// <summary>
 	/// Adds new constant with provided value. If constant with the same

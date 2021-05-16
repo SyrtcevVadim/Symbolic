@@ -100,6 +100,5 @@ public:
 	/// substituted variable's value
 	/// </summary>
 	double compute(double variableValue=0.0);
-
 };
 
